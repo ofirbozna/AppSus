@@ -49,7 +49,7 @@ function _createMails() {
             subject: utilService.makeLorem(3),
             body: utilService.makeLorem(utilService.getRandomIntInclusive(10, 50)),
             isRead: false,
-            sentAt: null,
+            sentAt:Date.now(),
             removedAt: null,
             from: utilService.getRandonEmail(),
             to: 'ofirNevo@appsus.com'
