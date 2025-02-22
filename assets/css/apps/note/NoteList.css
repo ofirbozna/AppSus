@@ -1,1 +1,46 @@
- /* note list */
+.note-lists-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px 20px;
+}
+
+.note-list {
+  column-count: 2;
+  column-gap: 10px;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .note-list {
+    column-count: 2;
+    column-gap: 15px;
+  }
+}
+
+@media (min-width: 950px) {
+  .note-list {
+    column-count: 3;
+    column-gap: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .note-list {
+    column-count: 4;
+    column-gap: 20px;
+  }
+}
+
+.list-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 5px;
+  opacity: 0.8;
+  color: white;
+}
+
+/* body {
+  background-color: #121212;
+  font-family: 'Arial', sans-serif;
+} */
