@@ -1,1 +1,18 @@
- /* mail list */
+/* .mail-line{
+   height: 50px;
+} */
+.mails-list li:first-child{
+    border-block-start:  0.5px solid rgb(186, 186, 186);
+
+}
+
+.mail-line {
+    display: flex;
+    border-block-end:  0.5px solid rgb(186, 186, 186);
+}
+
+.mail-line button{
+    background-color: transparent;
+    border: none;
+    color: var(--gray2);
+}
