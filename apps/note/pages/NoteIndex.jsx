@@ -10,6 +10,16 @@ export function NoteIndex() {
   const [notes, setNotes] = useState(null)
 
   useEffect(() => {
+    document.body.style.backgroundColor = '#121212' // Dark mode
+    document.body.style.color = 'white'
+
+    return () => {
+      document.body.style.backgroundColor = '' // Reset when app unmounts
+      document.body.style.color = ''
+    }
+  }, [])
+
+  useEffect(() => {
     loadNotes()
   }, [])
 
@@ -32,9 +42,13 @@ export function NoteIndex() {
       })
   }
 
+  function onAddNote(newNote) {
+    setNotes((prevNotes) => [newNote, ...prevNotes])
+  }
+
   return (
     <section className="notes-container">
-      <AddNote />
+      <AddNote onAddNote={onAddNote} />
       <NoteList notes={notes} onRemoveNote={onRemoveNote} />
     </section>
   )
