@@ -21,8 +21,15 @@ export function MailIndex() {
             )
     }
 
+    function removeMail(mailId){
+        mailsService.remove(mailId)
+        .then(()=>{
+            setMails(prevMails=> prevMails.filter(mail=> mailId !== mail.id))
+        })
+    }
+
     return <section className="mails-container">
-        <MailList mails={mails} />
+        <MailList mails={mails} onRemove={removeMail} />
     </section>
 }
 

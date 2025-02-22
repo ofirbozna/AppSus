@@ -2,7 +2,7 @@ import { mailsService } from "../services/mail.service.js"
 import { MailPreview } from "./MailPreview.jsx"
 
 const { useEffect } = React
-export function MailList({ mails }) {
+export function MailList({ mails,onRemove }) {
 
     return (
         <section className='mails-list'>
@@ -11,7 +11,7 @@ export function MailList({ mails }) {
                 {mails && mails.map(mail =>
                     <li className='mail-line' key={mail.id}>
                         <MailPreview mail={mail}/>
-                        <button className='fa-solid fa-trash'></button>
+                        <button className='fa-solid fa-trash' onClick={()=>onRemove(mail.id)}></button>
                     </li>
                 )}
             </ul>
