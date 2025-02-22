@@ -10,11 +10,11 @@ export function NoteIndex() {
   const [notes, setNotes] = useState(null)
 
   useEffect(() => {
-    document.body.style.backgroundColor = '#121212' // Dark mode
+    document.body.style.backgroundColor = '#121212'
     document.body.style.color = 'white'
 
     return () => {
-      document.body.style.backgroundColor = '' // Reset when app unmounts
+      document.body.style.backgroundColor = ''
       document.body.style.color = ''
     }
   }, [])
