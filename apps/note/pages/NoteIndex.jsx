@@ -1,13 +1,14 @@
 import { noteService } from '../services/note.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
-import { AddNote } from './cmps/AddNote.jsx'
+import { AddNote } from '../cmps/AddNote.jsx'
+import { NoteEdit } from '../cmps/NoteEdit.jsx'
 import { eventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
 const { useState, useEffect } = React
-const { Link, useSearchParams } = ReactRouterDOM
 
 export function NoteIndex() {
   const [notes, setNotes] = useState(null)
+  const [editingNote, setEditingNote] = useState(null)
 
   useEffect(() => {
     document.body.style.backgroundColor = '#121212'
@@ -28,17 +29,17 @@ export function NoteIndex() {
       setNotes(notes)
     })
   }
+
   function onRemoveNote(noteId) {
     noteService
       .deleteNote(noteId)
       .then(() => {
-        setNotes((prevNote) => prevNote.filter((note) => note.id !== noteId))
-
+        setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId))
         showSuccessMsg('Note Removed')
       })
       .catch((err) => {
-        console.log('Problem removing book', err)
-        showErrorMsg('Problems removing book')
+        console.log('Problem removing note', err)
+        showErrorMsg('Problem removing note')
       })
   }
 
@@ -46,10 +47,23 @@ export function NoteIndex() {
     setNotes((prevNotes) => [newNote, ...prevNotes])
   }
 
+  function onUpdateNote(updatedNote) {
+    setNotes((prevNotes) => prevNotes.map((note) => (note.id === updatedNote.id ? updatedNote : note)))
+  }
+
+  function onEdit(note) {
+    setEditingNote(note) // Opens modal
+  }
+
+  function onCloseEdit() {
+    setEditingNote(null) // Closes modal
+  }
+
   return (
     <section className="notes-container">
       <AddNote onAddNote={onAddNote} />
-      <NoteList notes={notes} onRemoveNote={onRemoveNote} />
+      <NoteList notes={notes} onRemoveNote={onRemoveNote} onEdit={onEdit} />
+      {editingNote && <NoteEdit note={editingNote} onClose={onCloseEdit} onUpdateNote={onUpdateNote} onRemoveNote={onRemoveNote} />}
     </section>
   )
 }
