@@ -1,15 +1,13 @@
-export function NotePreview({ note, onRemoveNote }) {
+import { NoteActions } from './NoteActions.jsx'
+
+export function NotePreview({ note, onRemoveNote, onEdit }) {
   return (
     <article className="note-preview">
       <h3>{note.title || 'Untitled'}</h3>
-      <p>{note.info.txt}</p>
-      <div className="note-actions">
-        <button onClick={() => onRemoveNote(note.id)}>Delete</button>
-        <button>Color</button>
-        <button>Archive</button>
-        <button>Dup</button>
-        <button>Email</button>
-      </div>
+      <p onClick={() => onEdit(note)} style={{ cursor: 'pointer' }}>
+        {note.info.txt}
+      </p>
+      <NoteActions note={note} onRemoveNote={onRemoveNote} onEdit={onEdit} />
     </article>
   )
 }
