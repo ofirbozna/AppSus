@@ -1,6 +1,6 @@
 import { NotePreview } from './NotePreview.jsx'
 
-export function NoteList({ notes, onRemoveNote }) {
+export function NoteList({ notes, onRemoveNote, onEdit }) {
   if (!notes || !notes.length) return <p>Loading notes...</p>
 
   const pinnedNotes = notes.filter((note) => note.isPinned)
@@ -9,20 +9,21 @@ export function NoteList({ notes, onRemoveNote }) {
   return (
     <section className="note-lists-container">
       {pinnedNotes.length > 0 && (
-        <Fragment>
+        <div>
+          {' '}
           <h6 className="list-title">Pinned</h6>
           <div className="note-list">
-            {pinnedNotes.map((note) => {
-              return <NotePreview note={note} onRemoveNote={onRemoveNote} key={note.id} />
-            })}
+            {pinnedNotes.map((note) => (
+              <NotePreview note={note} onRemoveNote={onRemoveNote} onEdit={onEdit} key={note.id} />
+            ))}
           </div>
-        </Fragment>
+        </div>
       )}
       <h6 className="list-title">{pinnedNotes.length > 0 && 'Others'}</h6>
       <div className="note-list">
-        {unPinnedNotes.map((note) => {
-          return <NotePreview note={note} onRemoveNote={onRemoveNote} key={note.id} />
-        })}
+        {unPinnedNotes.map((note) => (
+          <NotePreview note={note} onRemoveNote={onRemoveNote} onEdit={onEdit} key={note.id} />
+        ))}
       </div>
     </section>
   )
