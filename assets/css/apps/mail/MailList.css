@@ -17,3 +17,13 @@
     border: none;
     color: var(--gray2);
 }
+
+.mail-line.read{
+    background-color:#f2f6fc;
+    font-weight: 400;
+}
+
+.read h3,.read h4
+{
+    font-weight: 400;
+}

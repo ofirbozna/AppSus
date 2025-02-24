@@ -20,4 +20,5 @@
     overflow: hidden;       /* מסתיר את התוכן שיוצא מהרוחב */
     text-overflow: ellipsis; /* מוסיף "..." כשאין מקום */
     max-width: 100%;
+    font-size: 0.875rem;
 }
