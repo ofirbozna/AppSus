@@ -15,10 +15,30 @@ export const mailsService = {
     get,
     remove,
     save,
+    getDefaultFilter
 }
 
-function query() {
+function query(filterBy={}) {
     return storageService.query(MAILS_KEY)
+    .then(mails=>{
+        console.log(filterBy.txt)
+        if(filterBy.txt){
+            console.log(filterBy.txt)
+            const regExp = new RegExp(filterBy.txt, 'i')
+            mails = mails.filter(mail =>
+                 regExp.test(mail.subject) ||
+                 regExp.test(mail.body)||
+                 regExp.test(mail.from)
+                )
+        }
+        if (filterBy.isRead){
+            if(filterBy.isRead==='read'){
+            mails = mails.filter(mail=> mail.isRead === true)}
+            if(filterBy.isRead==='unread'){
+                mails = mails.filter(mail=> mail.isRead === false)}
+        }
+        return mails
+    })
 }
 
 function get(mailId) {
@@ -37,7 +57,13 @@ function save(mail) {
     }
 }
 
+function getDefaultFilter(filterBy = { txt: '', isRead: '' }) {
+    return {
+        txt: filterBy.txt,
+        isRead: filterBy.isRead
+    }
 
+}
 function _createMails() {
     const mails = utilService.loadFromStorage(MAILS_KEY) || []
 
@@ -49,7 +75,7 @@ function _createMails() {
             subject: utilService.makeLorem(3),
             body: utilService.makeLorem(utilService.getRandomIntInclusive(10, 50)),
             isRead: false,
-            sentAt:Date.now(),
+            sentAt: Date.now(),
             removedAt: null,
             from: utilService.getRandonEmail(),
             to: 'ofirNevo@appsus.com'
