@@ -11,6 +11,10 @@
 @import './cmps/AppHeader.css';
 
 @import './apps/note/NoteIndex.css';
+@import './apps/note/NoteList.css';
+@import './apps/note/NotePreview.css';
+@import './apps/note/AddNote.css';
+@import './apps/note/NoteEdit.css';
 @import './apps/mail/MailIndex.css';
 @import './apps/mail/MailList.css';
 @import './apps/mail/MailPreview.css';
