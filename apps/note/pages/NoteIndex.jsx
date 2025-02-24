@@ -9,7 +9,6 @@ const { useState, useEffect } = React
 export function NoteIndex() {
   const [notes, setNotes] = useState(null)
   const [editingNote, setEditingNote] = useState(null)
-
   useEffect(() => {
     document.body.style.backgroundColor = '#121212'
     document.body.style.color = 'white'
@@ -25,9 +24,7 @@ export function NoteIndex() {
   }, [])
 
   function loadNotes() {
-    noteService.getNotes().then((notes) => {
-      setNotes(notes)
-    })
+    noteService.getNotes().then((notes) => setNotes(notes))
   }
 
   function onRemoveNote(noteId) {
@@ -49,21 +46,36 @@ export function NoteIndex() {
 
   function onUpdateNote(updatedNote) {
     setNotes((prevNotes) => prevNotes.map((note) => (note.id === updatedNote.id ? updatedNote : note)))
+    setEditingNote(null)
   }
 
   function onEdit(note) {
-    setEditingNote(note) // Opens modal
+    console.log('Editing note:', note)
+    setEditingNote(note)
   }
 
   function onCloseEdit() {
-    setEditingNote(null) // Closes modal
+    console.log('Closing editor')
+    setEditingNote(null)
+  }
+
+  function onChangeColor(noteId, color) {
+    setNotes((prevNotes) => prevNotes.map((note) => (note.id === noteId ? { ...note, style: { backgroundColor: color } } : note)))
+
+    noteService.getNote(noteId).then((note) => {
+      if (note) {
+        if (!note.style) note.style = {}
+        note.style.backgroundColor = color
+        noteService.saveNote(note)
+      }
+    })
   }
 
   return (
     <section className="notes-container">
       <AddNote onAddNote={onAddNote} />
-      <NoteList notes={notes} onRemoveNote={onRemoveNote} onEdit={onEdit} />
-      {editingNote && <NoteEdit note={editingNote} onClose={onCloseEdit} onUpdateNote={onUpdateNote} onRemoveNote={onRemoveNote} />}
+      <NoteList notes={notes} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} />
+      {editingNote && <NoteEdit note={editingNote} onClose={onCloseEdit} onUpdateNote={onUpdateNote} />}
     </section>
   )
 }
