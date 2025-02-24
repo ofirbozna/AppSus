@@ -7,7 +7,8 @@ export const utilService = {
     getDayName,
     getMonthName,
     loadFromStorage,
-    saveToStorage
+    saveToStorage,
+    getRandonEmail
 }
 
 function saveToStorage(key, val) {
@@ -70,4 +71,13 @@ function getMonthName(date) {
         "July", "August", "September", "October", "November", "December"
     ]
     return monthNames[date.getMonth()]
+}
+
+
+function getRandonEmail(){
+    const users = ['momo', 'nally', 'guy123', 'shani1995', 'yardenbo', 'danro1', 'nevo45', 'shaygal', 'itay2020', 'meni4']
+    const mail= ['gmail','hotmail','walla']
+    var txt = users[getRandomIntInclusive(0,9)] + '@'+ mail[getRandomIntInclusive(0,2)]
+   
+    return txt
 }
