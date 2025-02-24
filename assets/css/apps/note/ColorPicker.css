@@ -1,0 +1,43 @@
+.color-picker {
+  position: relative;
+  display: inline-block;
+}
+
+.color-picker-toggle {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.color-picker-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
+  padding: 5px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  z-index: 100;
+}
+
+.color-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, border 0.2s;
+}
+
+.color-button:hover {
+  transform: scale(1.1);
+}
+
+.color-button.selected {
+  border: 2px solid black;
+}
