@@ -1,29 +1,80 @@
-const { useState } = React
-export function ColorPicker({ selectedColor, onColorSelect }) {
+const { useState, useRef, useEffect } = React
+
+export function ColorPicker({ note, onChangeColor, selectedColor, onColorSelect }) {
   const [isOpen, setIsOpen] = useState(false)
-  const colors = ['#ffcc80', '#80deea', '#ff8a80', '#a0c78c', '#e6b800', '#ffffff1a']
+  const colorMenuRef = useRef(null)
 
-  function handleToggleClick(ev) {
-    ev.stopPropagation()
-    setIsOpen(!isOpen)
-  }
+  const isNoteMode = note !== undefined
 
-  function handleColorSelect(color, ev) {
-    ev.stopPropagation()
-    onColorSelect(color)
+  const colors = [
+    '#ffffff', // Default/white
+    '#ffcc80', // Light orange
+    '#80deea', // Light blue
+    '#ff8a80', // Light red
+    '#a0c78c', // Light green
+    '#e6b800', // Yellow
+  ]
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (colorMenuRef.current && !colorMenuRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
+
+  function handleColorSelect(color, event) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    if (isNoteMode) {
+      onChangeColor(note.id, color)
+    } else {
+      onColorSelect(color)
+    }
+
     setIsOpen(false)
   }
 
   return (
-    <div className="color-picker" onClick={(ev) => ev.stopPropagation()}>
-      <button type="button" className="color-picker-toggle" onClick={handleToggleClick}>
-        🎨 Pick Color
+    <div
+      className="color-action"
+      ref={colorMenuRef}
+      onClick={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+      }}
+    >
+      <button
+        type="button"
+        title="Change color"
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          setIsOpen(!isOpen)
+        }}
+      >
+        <i className="fas fa-palette"></i>
       </button>
 
       {isOpen && (
-        <div className="color-picker-buttons" onClick={(ev) => ev.stopPropagation()}>
+        <div
+          className="color-dropdown"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+          }}
+        >
           {colors.map((color) => (
-            <button type="button" key={color} className={`color-button ${selectedColor === color ? 'selected' : ''}`} style={{ backgroundColor: color }} onClick={(ev) => handleColorSelect(color, ev)}></button>
+            <button type="button" key={color} className={`color-option ${isNoteMode ? (note.style && note.style.backgroundColor === color ? 'selected' : '') : selectedColor === color ? 'selected' : ''}`} style={{ backgroundColor: color }} onClick={(e) => handleColorSelect(color, e)} title={`Set to ${color === '#ffffff' ? 'default' : color}`} />
           ))}
         </div>
       )}

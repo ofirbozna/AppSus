@@ -5,7 +5,7 @@ const { useState, useEffect } = React
 
 export function NoteEdit({ note, onClose, onUpdateNote }) {
   const [editedNote, setEditedNote] = useState({ ...note })
-  const [bgColor, setBgColor] = useState(note.style && note.style.backgroundColor ? note.style.backgroundColor : '#ffffff1a')
+  const [bgColor, setBgColor] = useState(note.style && note.style.backgroundColor ? note.style.backgroundColor : '#ffffff')
 
   function handleChange(ev) {
     const { name, value } = ev.target
@@ -35,27 +35,40 @@ export function NoteEdit({ note, onClose, onUpdateNote }) {
   }
 
   return (
-    <section className="note-edit-modal open" onClick={onClose}>
+    <section
+      className="note-edit-modal open"
+      onClick={(e) => {
+        e.stopPropagation()
+        onClose()
+      }}
+    >
       <div className="modal-container" style={{ backgroundColor: bgColor }} onClick={handleContainerClick}>
         <form
+          onClick={(e) => e.stopPropagation()}
           onSubmit={(ev) => {
             ev.preventDefault()
             handleSave()
           }}
         >
-          <input type="text" placeholder="Title" value={editedNote.title} onChange={(ev) => setEditedNote({ ...editedNote, title: ev.target.value })} onClick={handleContainerClick} style={{ backgroundColor: bgColor }} />
+          <input type="text" placeholder="Title" value={editedNote.title} onChange={(ev) => setEditedNote({ ...editedNote, title: ev.target.value })} style={{ backgroundColor: bgColor }} />
 
-          <textarea name="txt" placeholder="Edit note..." value={editedNote.info && editedNote.info.txt} onChange={handleChange} onClick={handleContainerClick} style={{ backgroundColor: bgColor }} />
+          <textarea name="txt" placeholder="Edit note..." value={editedNote.info && editedNote.info.txt} onChange={handleChange} style={{ backgroundColor: bgColor }} />
 
-          <ColorPicker selectedColor={bgColor} onColorSelect={setBgColor} />
+          <div
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+            }}
+          >
+            <ColorPicker selectedColor={bgColor} onColorSelect={setBgColor} />
+          </div>
 
           <div className="modal-actions">
-            <button type="submit" onClick={handleContainerClick}>
-              Save
-            </button>
+            <button type="submit">Save</button>
             <button
               type="button"
               onClick={(ev) => {
+                ev.preventDefault()
                 ev.stopPropagation()
                 onClose()
               }}
