@@ -9,15 +9,16 @@ const { useState, useEffect } = React
 export function NoteIndex() {
   const [notes, setNotes] = useState(null)
   const [editingNote, setEditingNote] = useState(null)
-  useEffect(() => {
-    document.body.style.backgroundColor = '#121212'
-    document.body.style.color = 'white'
 
-    return () => {
-      document.body.style.backgroundColor = ''
-      document.body.style.color = ''
-    }
-  }, [])
+  // useEffect(() => {
+  //   document.body.style.backgroundColor = '#121212'
+  //   document.body.style.color = 'white'
+
+  //   return () => {
+  //     document.body.style.backgroundColor = ''
+  //     document.body.style.color = ''
+  //   }
+  // }, [])
 
   useEffect(() => {
     loadNotes()
