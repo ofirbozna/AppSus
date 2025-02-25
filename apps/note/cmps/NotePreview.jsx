@@ -8,23 +8,20 @@ export function NotePreview({ note, onRemoveNote, onEdit, onChangeColor }) {
     if (note.style && note.style.backgroundColor) {
       setBgColor(note.style.backgroundColor)
     } else {
-      setBgColor('#ffffff1a')
+      setBgColor('#ffffff')
     }
   }, [note.style && note.style.backgroundColor])
 
   return (
     <article className="note-preview" style={{ backgroundColor: bgColor }}>
       <h3>{note.title || 'Untitled'}</h3>
-      <p
-        onClick={() => {
-          console.log('Clicked on note:', note)
-          onEdit(note)
-        }}
-        style={{ cursor: 'pointer' }}
-      >
+      <p onClick={() => onEdit(note)} style={{ cursor: 'pointer' }}>
         {note.info && note.info.txt}
       </p>
-      <NoteActions note={note} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} />
+
+      <div className="note-actions-wrapper">
+        <NoteActions note={note} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} />
+      </div>
     </article>
   )
 }

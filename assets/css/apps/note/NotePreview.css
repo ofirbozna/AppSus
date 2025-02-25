@@ -1,49 +1,59 @@
 .note-preview {
+  position: relative;
   display: inline-block;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease-in-out;
-  color: white;
+  min-width: 85vw;
+  max-width: 85vw;
+  margin-bottom: 8px;
+  margin-left: 2px;
+  background-color: white;
+  border-radius: 8px;
+  padding-top: 12px;
+  padding: 16px;
+  padding-bottom: 40px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.2s ease-in-out;
+  color: black;
   box-sizing: border-box;
-  margin-bottom: 15px;
   word-wrap: break-word;
+  min-height: auto;
+  font-size: 1.12rem;
 }
+
 .note-preview:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .note-preview h3 {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 8px;
+  color: #202124;
 }
 
 .note-preview p {
-  font-size: 0.8rem;
-  opacity: 0.8;
+  font-size: 0.9rem;
+  opacity: 0.9;
   margin-bottom: 5px;
+  color: #202124;
 }
-
-.note-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: auto;
+@media (min-width: 601px) and (max-width: 830px) {
+  .note-preview {
+    min-width: 41vw;
+    padding-bottom: 45px;
+    margin: 5px;
+  }
 }
-
-.note-preview button {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
+@media (min-width: 831px) and (max-width: 1100px) {
+  .note-preview {
+    min-width: 28vw;
+    margin-bottom: 8px;
+  }
 }
-
-.note-preview button:hover {
-  background: rgba(255, 255, 255, 0.4);
+@media (min-width: 1101px) {
+  .note-preview {
+    min-width: 21vw;
+    max-width: 21vw;
+    margin-left: 16px;
+    margin-bottom: 12px;
+  }
 }

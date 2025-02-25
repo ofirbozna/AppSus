@@ -1,4 +1,3 @@
-
 @import './setups/typography.css';
 
 @import './basics/vars.css';
@@ -17,6 +16,7 @@
 @import './apps/note/AddNote.css';
 @import './apps/note/ColorPicker.css';
 @import './apps/note/NoteEdit.css';
+@import './apps/note/NoteAction.css';
 @import './apps/mail/MailIndex.css';
 @import './apps/mail/MailList.css';
 @import './apps/mail/MailPreview.css';
