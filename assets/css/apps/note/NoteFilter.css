@@ -1,8 +1,18 @@
+.search-bar-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+/*Filter Page*/
 .filter-page {
+  justify-self: center;
+  width: 70vw;
+  margin-top: 50px;
   padding: 20px;
   background-color: #f5f5f5;
-  min-height: 100vh;
-  direction: rtl;
+  min-height: 50vh;
 }
 
 .filter-header {
@@ -22,6 +32,8 @@
 }
 
 .search-container {
+  justify-self: center;
+  width: 30vw;
   margin-bottom: 25px;
 }
 
@@ -34,6 +46,8 @@
 }
 
 .filter-section {
+  justify-self: center;
+  width: 50vw;
   margin-bottom: 30px;
   background: white;
   padding: 15px;
@@ -66,6 +80,9 @@
   text-align: center;
   font-weight: bold;
   transition: transform 0.2s, background-color 0.3s;
+}
+.filter-type:hover {
+  transform: scale(1.07);
 }
 
 .filter-type.selected {
