@@ -1,4 +1,6 @@
 .compose-btn {
+    grid-area:compose-btn ;
+    justify-self: start;
     background-color: #c4e7ff;
     border: none;
     padding-block: 1.2rem;

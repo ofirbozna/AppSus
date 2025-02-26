@@ -1,0 +1,26 @@
+.folder-list {
+    grid-area: folder-list;
+    padding-block-start: 1rem;
+    min-width: 248px;
+    color: #202124;
+    font-size: 0.825rem;
+
+}
+
+.folder-list li {
+    padding-inline-start: 1.625rem;
+    align-content: center;
+    width: 85%;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.folder-list li:hover{
+    background-color: rgb(242, 242, 242);
+    border-radius: 0 20px 20px 0px;
+  
+}
+
+.folder-list i {
+    margin-inline-end: 1.125rem;
+}

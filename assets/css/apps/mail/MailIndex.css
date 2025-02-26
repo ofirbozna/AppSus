@@ -1,5 +1,12 @@
  /* mail index  */
 
  .mails-container{
+   display: grid;
+   grid-template-columns: auto 1fr ;
+   grid-template-areas: 
+   "compose-btn search"
+   "folder-list mail-list";
     font-family: roboto;
+    background-color: #f8fafe;
  }
+
