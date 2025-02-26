@@ -2,30 +2,39 @@ import { noteService } from '../services/note.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
 import { AddNote } from '../cmps/AddNote.jsx'
 import { NoteEdit } from '../cmps/NoteEdit.jsx'
+import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { eventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
 const { useState, useEffect } = React
+const { useSearchParams } = ReactRouterDOM
 
 export function NoteIndex() {
   const [notes, setNotes] = useState(null)
+  const [searchParams, setSearchParams] = useSearchParams()
   const [editingNote, setEditingNote] = useState(null)
-
-  // useEffect(() => {
-  //   document.body.style.backgroundColor = '#121212'
-  //   document.body.style.color = 'white'
-
-  //   return () => {
-  //     document.body.style.backgroundColor = ''
-  //     document.body.style.color = ''
-  //   }
-  // }, [])
+  const [filterBy, setFilterBy] = useState(noteService.getDefaultSearchParams(searchParams))
 
   useEffect(() => {
-    loadNotes()
-  }, [])
+    loadNotes(filterBy)
+  }, [filterBy])
 
-  function loadNotes() {
-    noteService.getNotes().then((notes) => setNotes(notes))
+  function loadNotes(filterBy) {
+    noteService.getNotes(filterBy).then(setNotes)
+  }
+
+  function onSetFilterBy(newFilterBy) {
+    setFilterBy(newFilterBy)
+    setSearchParams(newFilterBy)
+  }
+  function onPinNote(noteId) {
+    setNotes((prevNotes) => prevNotes.map((note) => (note.id === noteId ? { ...note, isPinned: !note.isPinned } : note)))
+
+    noteService.getNote(noteId).then((note) => {
+      if (note) {
+        note.isPinned = !note.isPinned
+        noteService.saveNote(note)
+      }
+    })
   }
 
   function onRemoveNote(noteId) {
@@ -74,8 +83,9 @@ export function NoteIndex() {
 
   return (
     <section className="notes-container">
+      <NoteFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
       <AddNote onAddNote={onAddNote} />
-      <NoteList notes={notes} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} />
+      <NoteList notes={notes} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} onPinNote={onPinNote} />
       {editingNote && <NoteEdit note={editingNote} onClose={onCloseEdit} onUpdateNote={onUpdateNote} />}
     </section>
   )

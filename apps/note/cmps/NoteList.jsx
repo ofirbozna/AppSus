@@ -1,6 +1,6 @@
 import { NotePreview } from './NotePreview.jsx'
 
-export function NoteList({ notes, onRemoveNote, onEdit, onChangeColor }) {
+export function NoteList({ notes, onRemoveNote, onEdit, onChangeColor, onPinNote }) {
   if (!notes || !notes.length) return <p>Loading notes...</p>
 
   const pinnedNotes = notes.filter((note) => note.isPinned)
@@ -13,7 +13,7 @@ export function NoteList({ notes, onRemoveNote, onEdit, onChangeColor }) {
           <h6 className="list-title">Pinned</h6>
           <div className="note-list">
             {pinnedNotes.map((note) => (
-              <NotePreview note={note} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} key={note.id} />
+              <NotePreview note={note} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} key={note.id} onPinNote={onPinNote} />
             ))}
           </div>
         </div>
@@ -21,7 +21,7 @@ export function NoteList({ notes, onRemoveNote, onEdit, onChangeColor }) {
       <h6 className="list-title">{pinnedNotes.length > 0 && 'Others'}</h6>
       <div className="note-list">
         {unPinnedNotes.map((note) => (
-          <NotePreview note={note} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} key={note.id} />
+          <NotePreview note={note} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} key={note.id} onPinNote={onPinNote} />
         ))}
       </div>
     </section>
