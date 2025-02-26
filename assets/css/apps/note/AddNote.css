@@ -1,60 +1,50 @@
 .add-note {
   width: 90%;
-  max-width: 500px;
+  max-width: 60vw;
   margin: 15px auto;
-  padding: 0 5px 30px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.627);
   transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
   overflow: hidden;
-  max-height: 60px;
+  max-height: 50px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
-/* Expand when focused */
-.add-note:focus-within {
+.add-note textarea {
+  width: 100%;
+  font-size: 1rem;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: black;
+  outline: none;
+  resize: none;
+  min-height: 20px;
+}
+
+.add-note textarea::placeholder {
+  color: #5f6368;
+  font-size: 1rem;
+}
+
+.add-note.expanded {
   max-height: 250px;
   padding: 12px;
 }
 
-.add-note form {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.add-note textarea {
-  width: 100%;
-  min-height: 10px;
-  resize: none;
-
-  border-radius: 6px;
-  border: none;
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  font-size: 1rem;
-  outline: none;
-  transition: all 0.3s ease-in-out;
-  margin: 0;
-}
-.add-note input::placeholder,
-.add-note textarea::placeholder {
-  padding-left: 2px;
-}
-
 .add-note input,
 .add-note button {
-  opacity: 0;
-  visibility: hidden;
-  height: 0;
-  transition: all 0.3s ease-in-out;
+  display: none;
 }
 
-.add-note:focus-within input,
-.add-note:focus-within button {
+.add-note.expanded input,
+.add-note.expanded button {
+  display: block;
   opacity: 1;
   visibility: visible;
   height: auto;
@@ -63,40 +53,26 @@
 .add-note input {
   width: 100%;
   font-size: 1rem;
-  padding: 10px 0;
+  padding: 10px;
   border-radius: 6px;
   border: none;
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  font-size: 1rem;
+  background: transparent;
+  color: black;
   outline: none;
 }
 
 .add-note button {
   align-self: flex-end;
-  background: rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #1a73e8;
+  font-weight: bold;
   border: none;
-  color: white;
-  padding: 8px 15px;
-  border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s;
-  margin-top: 5px;
+  padding: 8px 12px;
+  border-radius: 6px;
 }
 
 .add-note button:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-@media (min-width: 600px) {
-  .add-note {
-    width: 80%;
-  }
-}
-
-@media (min-width: 900px) {
-  .add-note {
-    width: 70%;
-    max-width: 600px;
-  }
+  background: rgba(26, 115, 232, 0.1);
 }

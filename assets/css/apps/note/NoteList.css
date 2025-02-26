@@ -1,37 +1,17 @@
 .note-lists-container {
   display: flex;
   flex-direction: column;
-  margin: 0;
-  padding: 10px 20px;
+  width: 90vw;
+  margin: 0 auto;
+  /* padding: 5px; */
+  padding: 10px;
 }
 
 .note-list {
-  column-count: 2;
-  column-gap: 10px;
-  width: 100%;
+  column-count: 1; /* Default for smallest screens */
+  width: 90vw;
+  display: block;
 }
-
-@media (min-width: 600px) {
-  .note-list {
-    column-count: 2;
-    column-gap: 15px;
-  }
-}
-
-@media (min-width: 950px) {
-  .note-list {
-    column-count: 3;
-    column-gap: 20px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .note-list {
-    column-count: 4;
-    column-gap: 20px;
-  }
-}
-
 .list-title {
   font-size: 1rem;
   font-weight: bold;
@@ -40,7 +20,26 @@
   color: white;
 }
 
-/* body {
-  background-color: #121212;
-  font-family: 'Arial', sans-serif;
-} */
+@media (min-width: 601px) and (max-width: 830px) {
+  .note-list {
+    column-count: 2;
+    width: 85vw;
+    column-gap: 0;
+  }
+  .note-lists-container {
+    margin: 0;
+  }
+}
+@media (min-width: 831px) and (max-width: 1100px) {
+  .note-list {
+    column-count: 3;
+    width: 85vw;
+  }
+}
+@media (min-width: 1101px) {
+  .note-list {
+    column-count: 4;
+    width: 100%;
+    width: 85vw;
+  }
+}

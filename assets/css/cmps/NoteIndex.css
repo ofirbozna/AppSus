@@ -1,0 +1,8 @@
+.notes-container {
+  display: flex;
+  justify-self: center;
+  width: 90vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

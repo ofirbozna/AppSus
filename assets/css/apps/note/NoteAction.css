@@ -1,0 +1,64 @@
+.note-actions-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  background: transparent;
+  border-radius: 0 0 8px 8px;
+  z-index: 10;
+}
+
+.note-preview:hover .note-actions-wrapper {
+  opacity: 1;
+  visibility: visible;
+}
+
+.note-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.note-actions button {
+  background: transparent;
+  border: none;
+  color: #5f6368;
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.note-actions button:hover {
+  background-color: rgba(95, 99, 104, 0.1);
+  color: #202124;
+}
+
+.color-picker-container {
+  position: relative;
+}
+
+.color-picker-container .color-picker {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+
+.color-picker-container button:focus .color-picker,
+.color-picker-container button:hover .color-picker {
+  display: block;
+}
