@@ -7,10 +7,6 @@ export function MailCompose({ onSetIsCompose }) {
     const [mailToCompose, setMailToCompose] = useState(mailsService.getEmptyMail())
     console.log(mailToCompose)
 
-    useEffect(() => {
-
-    }, [])
-
     function onHandleChange({ target }) {
         let { value, name } = target
         setMailToCompose(prevMail => ({ ...prevMail, [name]: value }))
@@ -21,7 +17,8 @@ export function MailCompose({ onSetIsCompose }) {
         ev.preventDefault()
         console.log('sent')
         mailsService.save(mailToCompose)
-        onSetIsCompose()
+        .then(onSetIsCompose())
+        
     }
 
     const { body, subject, to } = mailToCompose
