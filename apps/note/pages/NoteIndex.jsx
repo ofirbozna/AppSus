@@ -2,13 +2,17 @@ import { noteService } from '../services/note.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
 import { AddNote } from '../cmps/AddNote.jsx'
 import { NoteEdit } from '../cmps/NoteEdit.jsx'
+import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { eventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
 const { useState, useEffect } = React
+const { Link, useSearchParams } = ReactRouterDOM
 
 export function NoteIndex() {
   const [notes, setNotes] = useState(null)
+  const [searchParams, setSearchParams] = useSearchParams()
   const [editingNote, setEditingNote] = useState(null)
+  const [filterBy, setFilterBy] = useState(noteService.getDefaultSearchParams(searchParams))
 
   // useEffect(() => {
   //   document.body.style.backgroundColor = '#121212'
@@ -21,11 +25,15 @@ export function NoteIndex() {
   // }, [])
 
   useEffect(() => {
-    loadNotes()
-  }, [])
+    setSearchParams(filterBy)
+    loadNotes(filterBy)
+  }, [filterBy])
 
-  function loadNotes() {
-    noteService.getNotes().then((notes) => setNotes(notes))
+  function loadNotes(filterBy) {
+    noteService.getNotes(filterBy).then((notes) => setNotes(notes))
+  }
+  function onSetFilterBy(filterBy) {
+    setFilterBy({ ...filterBy })
   }
 
   function onRemoveNote(noteId) {
@@ -74,6 +82,7 @@ export function NoteIndex() {
 
   return (
     <section className="notes-container">
+      <NoteFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
       <AddNote onAddNote={onAddNote} />
       <NoteList notes={notes} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} />
       {editingNote && <NoteEdit note={editingNote} onClose={onCloseEdit} onUpdateNote={onUpdateNote} />}
