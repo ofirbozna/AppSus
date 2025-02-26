@@ -24,6 +24,12 @@ function getNotes(filterBy = {}) {
     if (filterBy.status) {
       notes = notes.filter((note) => note.status === filterBy.status)
     }
+    if (filterBy.type) {
+      notes = notes.filter((note) => note.type === filterBy.type)
+    }
+    if (filterBy.color) {
+      notes = notes.filter((note) => note.style && note.style.backgroundColor === filterBy.color)
+    }
     return notes
   })
 }
