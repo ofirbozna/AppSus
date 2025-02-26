@@ -6,7 +6,7 @@ import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { eventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
 const { useState, useEffect } = React
-const { Link, useSearchParams } = ReactRouterDOM
+const { useSearchParams } = ReactRouterDOM
 
 export function NoteIndex() {
   const [notes, setNotes] = useState(null)
@@ -14,26 +14,17 @@ export function NoteIndex() {
   const [editingNote, setEditingNote] = useState(null)
   const [filterBy, setFilterBy] = useState(noteService.getDefaultSearchParams(searchParams))
 
-  // useEffect(() => {
-  //   document.body.style.backgroundColor = '#121212'
-  //   document.body.style.color = 'white'
-
-  //   return () => {
-  //     document.body.style.backgroundColor = ''
-  //     document.body.style.color = ''
-  //   }
-  // }, [])
-
   useEffect(() => {
-    setSearchParams(filterBy)
     loadNotes(filterBy)
-  }, [filterBy])
+  }, [filterBy]) // ✅ No more infinite loop
 
   function loadNotes(filterBy) {
-    noteService.getNotes(filterBy).then((notes) => setNotes(notes))
+    noteService.getNotes(filterBy).then(setNotes)
   }
-  function onSetFilterBy(filterBy) {
-    setFilterBy({ ...filterBy })
+
+  function onSetFilterBy(newFilterBy) {
+    setFilterBy(newFilterBy)
+    setSearchParams(newFilterBy) // ✅ Updates URL but doesn't cause infinite re-renders
   }
 
   function onRemoveNote(noteId) {

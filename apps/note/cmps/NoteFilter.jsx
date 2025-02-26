@@ -1,22 +1,18 @@
 const { useState, useEffect } = React
-const { useNavigate } = ReactRouterDOM
+const { useNavigate, useSearchParams } = ReactRouterDOM
 
-export function NoteFilter({ filterBy, onSetFilterBy }) {
+export function NoteFilter({ filterBy }) {
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
   useEffect(() => {
-    onSetFilterBy(filterByToEdit)
+    setSearchParams(filterByToEdit)
   }, [filterByToEdit])
 
   function onHandleChange(ev) {
     let { value, name: field } = ev.target
-    setFilterByToEdit((prevFilterBy) => ({ ...prevFilterBy, [field]: value }))
-  }
-
-  function onSubmitForm(ev) {
-    ev.preventDefault()
-    onSetFilterBy(filterByToEdit)
+    setFilterByToEdit((prev) => ({ ...prev, [field]: value }))
   }
 
   function navigateToFilterPage() {
@@ -29,15 +25,9 @@ export function NoteFilter({ filterBy, onSetFilterBy }) {
 
   return (
     <section className="filter-container">
-      <h2>Search Notes</h2>
-      <form onSubmit={onSubmitForm}>
-        <div className="search-bar" onClick={navigateToFilterPage}>
-          <input name="title" value={filterByToEdit.title} onChange={onHandleChange} type="text" placeholder="Search notes..." readOnly />
-          <button type="button" className="filter-icon">
-            🔍
-          </button>
-        </div>
-      </form>
+      <div className="search-bar" onClick={navigateToFilterPage}>
+        <input className="search-bar-input" name="title" value={filterByToEdit.title} onChange={onHandleChange} type="text" placeholder="Search notes..." readOnly />
+      </div>
     </section>
   )
 }

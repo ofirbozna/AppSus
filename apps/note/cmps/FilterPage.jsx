@@ -1,15 +1,14 @@
 const { useState, useEffect } = React
-const { useNavigate, useLocation } = ReactRouterDOM
+const { useSearchParams, useNavigate } = ReactRouterDOM
 
 export function FilterPage() {
   const navigate = useNavigate()
-  const location = useLocation()
-  const queryParams = new URLSearchParams(location.search)
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const [filterBy, setFilterBy] = useState({
-    title: queryParams.get('title') || '',
-    type: queryParams.get('type') || '',
-    color: queryParams.get('color') || '',
+    title: searchParams.get('title') || '',
+    type: searchParams.get('type') || '',
+    color: searchParams.get('color') || '',
   })
 
   function handleChange(ev) {
@@ -26,25 +25,21 @@ export function FilterPage() {
   }
 
   function applyFilters() {
-    const params = new URLSearchParams()
+    const newSearchParams = new URLSearchParams()
     Object.entries(filterBy).forEach(([key, value]) => {
-      if (value) params.set(key, value)
+      if (value) newSearchParams.set(key, value)
     })
-    navigate(`/note?${params.toString()}`)
+
+    setSearchParams(newSearchParams)
+    navigate(`/note?${newSearchParams.toString()}`)
   }
 
   function clearFilters() {
     setFilterBy({ title: '', type: '', color: '' })
+    setSearchParams('')
   }
 
-  const colors = [
-    '#ffffff', // Default/white
-    '#ffcc80', // Light orange
-    '#80deea', // Light blue
-    '#ff8a80', // Light red
-    '#a0c78c', // Light green
-    '#e6b800', // Yellow
-  ]
+  const colors = ['#ffffff', '#ffcc80', '#80deea', '#ff8a80', '#a0c78c', '#e6b800']
 
   return (
     <section className="filter-page">
@@ -81,15 +76,7 @@ export function FilterPage() {
         <h3>Colors</h3>
         <div className="color-options">
           {colors.map((color, idx) => (
-            <div
-              key={idx}
-              className={`color-option ${filterBy.color === color ? 'selected' : ''}`}
-              style={{
-                backgroundColor: color,
-                border: color === '#ffffff' ? '1px solid #ccc' : 'none',
-              }}
-              onClick={() => onSelectColor(color)}
-            />
+            <div key={idx} className={`color-option ${filterBy.color === color ? 'selected' : ''}`} style={{ backgroundColor: color, border: color === '#ffffff' ? '1px solid #ccc' : 'none' }} onClick={() => onSelectColor(color)} />
           ))}
         </div>
       </div>
