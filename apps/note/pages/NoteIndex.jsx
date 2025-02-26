@@ -16,7 +16,7 @@ export function NoteIndex() {
 
   useEffect(() => {
     loadNotes(filterBy)
-  }, [filterBy]) // ✅ No more infinite loop
+  }, [filterBy])
 
   function loadNotes(filterBy) {
     noteService.getNotes(filterBy).then(setNotes)
@@ -24,7 +24,17 @@ export function NoteIndex() {
 
   function onSetFilterBy(newFilterBy) {
     setFilterBy(newFilterBy)
-    setSearchParams(newFilterBy) // ✅ Updates URL but doesn't cause infinite re-renders
+    setSearchParams(newFilterBy)
+  }
+  function onPinNote(noteId) {
+    setNotes((prevNotes) => prevNotes.map((note) => (note.id === noteId ? { ...note, isPinned: !note.isPinned } : note)))
+
+    noteService.getNote(noteId).then((note) => {
+      if (note) {
+        note.isPinned = !note.isPinned
+        noteService.saveNote(note)
+      }
+    })
   }
 
   function onRemoveNote(noteId) {
@@ -75,7 +85,7 @@ export function NoteIndex() {
     <section className="notes-container">
       <NoteFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
       <AddNote onAddNote={onAddNote} />
-      <NoteList notes={notes} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} />
+      <NoteList notes={notes} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} onPinNote={onPinNote} />
       {editingNote && <NoteEdit note={editingNote} onClose={onCloseEdit} onUpdateNote={onUpdateNote} />}
     </section>
   )
