@@ -4,15 +4,16 @@
 const { useState, useEffect } = React
 export function MailFilter({ filterBy, onSetFilterBy }) {
 
-    const [filteByToEdit, setFilterByToEdit] = useState({ ...filterBy })
-    console.log(filteByToEdit)
+    const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
+    console.log(filterByToEdit)
 
     useEffect(() => {
-        onSetFilterBy(filteByToEdit)
-    }, [filteByToEdit])
+        onSetFilterBy(filterByToEdit)
+    }, [filterByToEdit])
 
-    function onSubmitForm() {
-        console.log('filter')
+    function onSubmitForm(ev) {
+        ev.preventDefault()
+        onSetFilterBy(filterByToEdit)
     }
 
     function onHandelChange({ target }) {
@@ -23,8 +24,8 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
 
     return (
         <form onSubmit={onSubmitForm}>
-            <input onChange={onHandelChange} type="text" value={filteByToEdit.txt} name="txt" />
-            <select onChange={onHandelChange} name="isRead" value={filteByToEdit.isRead} id="isRead">
+            <input onChange={onHandelChange} type="text" value={filterByToEdit.txt} name="txt" />
+            <select onChange={onHandelChange} name="isRead" value={filterByToEdit.isRead} id="isRead">
                 <option value="all">All</option>
                 <option value="read">Read</option>
                 <option value="unread">Unread</option>
