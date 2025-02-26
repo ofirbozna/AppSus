@@ -1,6 +1,7 @@
 import { MailList } from "../cmps/MailList.jsx"
 import { mailsService } from "../services/mail.service.js"
 import { MailFilter } from "../cmps/MailFilter.jsx"
+import { MailCompose } from "../cmps/MailCompose.jsx"
 
 const { useState, useEffect } = React
 
@@ -8,6 +9,7 @@ export function MailIndex() {
 
     const [mails, setMails] = useState([])
     const [filterBy, setFilterBy] = useState(mailsService.getDefaultFilter())
+    const [isCompose,setIsCompose]= useState(false)
 
     useEffect(() => {
         loadMails()
@@ -33,10 +35,16 @@ export function MailIndex() {
             })
     }
 
+    function onSetIsCompose(){
+        setIsCompose(!isCompose)
+    }
+
 
     return <section className="mails-container">
         <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy}/>
+        <button className='compose-btn' onClick={onSetIsCompose}><i className="fa-solid fa-pencil"></i>Compose</button>
         <MailList mails={mails} onRemove={removeMail}/>
+       {isCompose && <MailCompose onSetIsCompose={onSetIsCompose}/>}
     </section>
 }
 

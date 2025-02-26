@@ -15,7 +15,8 @@ export const mailsService = {
     get,
     remove,
     save,
-    getDefaultFilter
+    getDefaultFilter,
+    getEmptyMail
 }
 
 function query(filterBy={}) {
@@ -63,6 +64,19 @@ function getDefaultFilter(filterBy = { txt: '', isRead: '' }) {
         isRead: filterBy.isRead
     }
 
+}
+
+function getEmptyMail(subject='',body='',to=''){
+    return{
+        createdAt: Date.now(),
+        subject,
+        body,
+        isRead: false,
+        sentAt: Date.now(),
+        removedAt: null,
+        from: 'ofirNevo@appsus.com',
+        to,
+    }
 }
 function _createMails() {
     const mails = utilService.loadFromStorage(MAILS_KEY) || []
