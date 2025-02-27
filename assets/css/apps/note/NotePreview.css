@@ -1,10 +1,11 @@
 .note-preview {
   position: relative;
   display: inline-block;
-  min-width: 85vw;
-  max-width: 85vw;
+
+  min-width: 75vw;
+  max-width: 75vw;
   margin-bottom: 8px;
-  margin-left: 2px;
+  margin-left: 30px;
   background-color: white;
   border-radius: 8px;
   padding-top: 12px;
@@ -16,7 +17,7 @@
   box-sizing: border-box;
   word-wrap: break-word;
   min-height: auto;
-  font-size: 1.12rem;
+  /* font-size: 1.12rem; */
 }
 
 .note-preview:hover {
@@ -24,14 +25,14 @@
 }
 
 .note-preview h3 {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 8px;
   color: #202124;
 }
 
 .note-preview p {
-  font-size: 0.9rem;
+  font-size: 1em;
   opacity: 0.9;
   margin-bottom: 5px;
   color: #202124;
@@ -71,11 +72,14 @@
     min-width: 41vw;
     padding-bottom: 45px;
     margin: 5px;
+    margin-left: 25px;
   }
 }
 @media (min-width: 831px) and (max-width: 1100px) {
   .note-preview {
     min-width: 28vw;
+    margin-left: 10px;
+    margin-right: 0px;
     margin-bottom: 8px;
   }
 }
@@ -83,7 +87,7 @@
   .note-preview {
     min-width: 21vw;
     max-width: 21vw;
-    margin-left: 16px;
+    margin-left: 0px;
     margin-bottom: 12px;
   }
 }
