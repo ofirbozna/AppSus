@@ -1,6 +1,6 @@
 import { ColorPicker } from './ColorPicker.jsx'
 
-export function NoteActions({ note, onMoveToTrash, onMoveToArchive, onEdit, onChangeColor }) {
+export function NoteActions({ note, onMoveToTrash, onMoveToArchive, onEdit, onChangeColor, onDuplicateNote }) {
   return (
     <div className="note-actions">
       <button
@@ -37,7 +37,13 @@ export function NoteActions({ note, onMoveToTrash, onMoveToArchive, onEdit, onCh
         <ColorPicker note={note} onChangeColor={onChangeColor} />
       </div>
 
-      <button title="Duplicate" onClick={(e) => e.stopPropagation()}>
+      <button
+        title="Duplicate"
+        onClick={(e) => {
+          e.stopPropagation()
+          onDuplicateNote(note)
+        }}
+      >
         <i className="fas fa-copy"></i>
       </button>
 

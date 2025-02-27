@@ -83,18 +83,41 @@ export function NoteIndex() {
   function onCloseEdit() {
     console.log('Closing editor')
     setEditingNote(null)
+    showSuccessMsg('Note been edited')
   }
 
   function onChangeColor(noteId, color) {
     setNotes((prevNotes) => prevNotes.map((note) => (note.id === noteId ? { ...note, style: { backgroundColor: color } } : note)))
 
-    noteService.getNote(noteId).then((note) => {
-      if (note) {
-        if (!note.style) note.style = {}
-        note.style.backgroundColor = color
-        noteService.saveNote(note)
-      }
-    })
+    noteService
+      .getNote(noteId)
+      .then((note) => {
+        if (note) {
+          if (!note.style) note.style = {}
+          note.style.backgroundColor = color
+          noteService.saveNote(note)
+          showSuccessMsg('Color changed Successfully')
+        }
+      })
+      .catch((err) => {
+        console.log('Problem to change color', err)
+        showErrorMsg('Problem to change color')
+      })
+  }
+  function onDuplicateNote(note) {
+    const duplicatedNote = noteService.duplicateNote(note)
+
+    duplicatedNote.id = null
+
+    noteService
+      .saveNote(duplicatedNote)
+      .then((newNote) => (duplicatedNote.id = newNote.id))
+      .catch((err) => {
+        console.log(err)
+        setNotes((prevNotes) => prevNotes.filter((currNote) => currNote.id !== duplicatedNote.id))
+      })
+    setNotes((prevNotes) => [duplicatedNote, ...prevNotes])
+    showSuccessMsg('Note Duplicated Successfully')
   }
 
   return (
@@ -106,7 +129,7 @@ export function NoteIndex() {
         <section className="notes-container">
           <NoteFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
           <AddNote onAddNote={onAddNote} />
-          <NoteList notes={notes} onMoveToTrash={onMoveToTrash} onEdit={onEdit} onChangeColor={onChangeColor} onPinNote={onPinNote} onMoveToArchive={onMoveToArchive} />
+          <NoteList notes={notes} onMoveToTrash={onMoveToTrash} onEdit={onEdit} onChangeColor={onChangeColor} onPinNote={onPinNote} onMoveToArchive={onMoveToArchive} onDuplicateNote={onDuplicateNote} />
           {editingNote && <NoteEdit note={editingNote} onClose={onCloseEdit} onUpdateNote={onUpdateNote} />}
         </section>
       </div>

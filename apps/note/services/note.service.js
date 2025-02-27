@@ -16,6 +16,7 @@ export const noteService = {
   moveToTrash,
   moveToArchive,
   restoreNote,
+  duplicateNote,
 }
 
 function getNotes(filterBy = {}) {
@@ -83,6 +84,11 @@ function getDefaultNote() {
     style: {},
     status: 'notes',
   }
+}
+function duplicateNote(note) {
+  const newNote = structuredClone(note)
+  newNote.id = utilService.makeId()
+  return newNote
 }
 
 function _createNote(txt, title = '', style = {}, status = 'notes') {
