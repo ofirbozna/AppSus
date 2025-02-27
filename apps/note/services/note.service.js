@@ -13,6 +13,9 @@ export const noteService = {
   getDefaultFilter,
   getDefaultNote,
   getDefaultSearchParams,
+  moveToTrash,
+  moveToArchive,
+  restoreNote,
 }
 
 function getNotes(filterBy = {}) {
@@ -105,4 +108,25 @@ function _createNotes() {
     ]
     utilService.saveToStorage(NOTES_KEY, notes)
   }
+}
+
+function moveToTrash(noteId) {
+  return getNote(noteId).then((note) => {
+    note.status = 'trash'
+    return saveNote(note)
+  })
+}
+
+function moveToArchive(noteId) {
+  return getNote(noteId).then((note) => {
+    note.status = 'archive'
+    return saveNote(note)
+  })
+}
+
+function restoreNote(noteId) {
+  return getNote(noteId).then((note) => {
+    note.status = 'notes'
+    return saveNote(note)
+  })
 }
