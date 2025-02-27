@@ -1,7 +1,7 @@
 import { NoteActions } from './NoteActions.jsx'
 const { useState, useEffect } = React
 
-export function NotePreview({ note, onRemoveNote, onEdit, onChangeColor, onPinNote }) {
+export function NotePreview({ note, onRemoveNote, onEdit, onChangeColor, onPinNote, onMoveToTrash, onMoveToArchive }) {
   const [bgColor, setBgColor] = useState(note.style && note.style.backgroundColor ? note.style.backgroundColor : '#ffffff')
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export function NotePreview({ note, onRemoveNote, onEdit, onChangeColor, onPinNo
       </p>
 
       <div className="note-actions-wrapper">
-        <NoteActions note={note} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} />
+        <NoteActions note={note} onRemoveNote={onRemoveNote} onEdit={onEdit} onChangeColor={onChangeColor} onMoveToTrash={onMoveToTrash} onMoveToArchive={onMoveToArchive} />
       </div>
     </article>
   )
