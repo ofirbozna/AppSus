@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 90vw;
-  margin: 0 auto;
+  margin: 0;
   /* padding: 5px; */
   padding: 10px;
 }
@@ -13,11 +13,11 @@
   display: block;
 }
 .list-title {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: bold;
-  margin-top: 5px;
+  margin-bottom: 5px;
   opacity: 0.8;
-  color: white;
+  color: rgb(98, 98, 98);
 }
 
 @media (min-width: 601px) and (max-width: 830px) {
@@ -39,7 +39,7 @@
 @media (min-width: 1101px) {
   .note-list {
     column-count: 4;
-    width: 100%;
+    /* width: 100%; */
     width: 85vw;
   }
 }

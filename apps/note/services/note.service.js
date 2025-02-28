@@ -13,6 +13,10 @@ export const noteService = {
   getDefaultFilter,
   getDefaultNote,
   getDefaultSearchParams,
+  moveToTrash,
+  moveToArchive,
+  restoreNote,
+  duplicateNote,
 }
 
 function getNotes(filterBy = {}) {
@@ -81,6 +85,11 @@ function getDefaultNote() {
     status: 'notes',
   }
 }
+function duplicateNote(note) {
+  const newNote = structuredClone(note)
+  newNote.id = utilService.makeId()
+  return newNote
+}
 
 function _createNote(txt, title = '', style = {}, status = 'notes') {
   const note = getDefaultNote()
@@ -105,4 +114,25 @@ function _createNotes() {
     ]
     utilService.saveToStorage(NOTES_KEY, notes)
   }
+}
+
+function moveToTrash(noteId) {
+  return getNote(noteId).then((note) => {
+    note.status = 'trash'
+    return saveNote(note)
+  })
+}
+
+function moveToArchive(noteId) {
+  return getNote(noteId).then((note) => {
+    note.status = 'archive'
+    return saveNote(note)
+  })
+}
+
+function restoreNote(noteId) {
+  return getNote(noteId).then((note) => {
+    note.status = 'notes'
+    return saveNote(note)
+  })
 }

@@ -1,0 +1,23 @@
+.empty-archive-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  color: #5f6368;
+}
+
+.empty-archive-icon {
+  width: 100px;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
+
+.empty-archive-message {
+  font-size: 1.4rem;
+  font-weight: 500;
+}

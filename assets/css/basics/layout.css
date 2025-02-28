@@ -1,3 +1,23 @@
 .container {
-    padding: 0 1em;
+  padding: 0 1em;
+}
+
+.note-layout {
+  display: grid;
+  grid-template-columns: 0.3fr 1.7fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'side-bar main main'
+    'side-bar main main'
+    'side-bar main main';
+}
+
+.note-side-bar {
+  grid-area: side-bar;
+}
+
+.note-main {
+  grid-area: main;
 }
