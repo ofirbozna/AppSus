@@ -4,17 +4,21 @@ import { MailFilter } from "../cmps/MailFilter.jsx"
 import { MailCompose } from "../cmps/MailCompose.jsx"
 import { MailFolderList } from "../cmps/MailFolderList.jsx"
 const { useState, useEffect } = React
+const { useSearchParams } = ReactRouterDOM
 
 export function MailIndex() {
 
     const [mails, setMails] = useState([])
-    const [filterBy, setFilterBy] = useState(mailsService.getDefaultFilter())
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [filterBy, setFilterBy] = useState(mailsService.getFilterFromSearchParams(searchParams))
     const [isCompose, setIsCompose] = useState(false)
+   
 
     useEffect(() => {
+        setSearchParams(filterBy)
         loadMails()
     }, [filterBy])
-
+ 
     function loadMails() {
         mailsService.query(filterBy)
             .then(mails => {

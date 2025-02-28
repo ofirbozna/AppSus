@@ -16,7 +16,8 @@ export const mailsService = {
     remove,
     save,
     getDefaultFilter,
-    getEmptyMail
+    getEmptyMail,
+    getFilterFromSearchParams
 }
 
 function query(filterBy = {}) {
@@ -91,6 +92,15 @@ function getEmptyMail(subject = '', body = '', to = '') {
         from: 'ofirNevo@appsus.com',
         to,
     }
+}
+
+function getFilterFromSearchParams(searchParams) {
+    console.log('searchParams:', searchParams)
+    const txt = searchParams.get('txt') || ''
+    const isRead= searchParams.get('isRead') || ''
+    const folder= searchParams.get('folder') || 'inbox'
+
+    return { txt, isRead,folder }
 }
 function _createMails() {
     const mails = utilService.loadFromStorage(MAILS_KEY) || []
