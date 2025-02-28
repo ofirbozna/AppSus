@@ -71,10 +71,11 @@ function getDefaultSearchParams(searchParams) {
   }
   return filterBy
 }
-function getDefaultNote() {
+function getDefaultNote(createdAt = '111223') {
   return {
     id: null,
     title: '',
+    createdAt,
     type: 'note-txt',
     isPinned: false,
     info: {
@@ -114,6 +115,9 @@ function _createNotes() {
     ]
     utilService.saveToStorage(NOTES_KEY, notes)
   }
+}
+function createdAtNote() {
+  return new Date().toISOString().split('T')[0]
 }
 
 function moveToTrash(noteId) {
