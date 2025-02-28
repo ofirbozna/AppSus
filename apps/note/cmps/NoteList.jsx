@@ -8,7 +8,7 @@ export function NoteList({ notes, onMoveToTrash, onMoveToArchive, onEdit, onChan
   return (
     <section className="note-lists-container">
       {pinnedNotes.length > 0 && (
-        <div>
+        <div className="note-lists-pin">
           <h6 className="list-title">Pinned</h6>
           <div className="note-list">
             {pinnedNotes.map((note) => (
@@ -17,11 +17,13 @@ export function NoteList({ notes, onMoveToTrash, onMoveToArchive, onEdit, onChan
           </div>
         </div>
       )}
-      <h6 className="list-title">{pinnedNotes.length > 0 && 'Others'}</h6>
-      <div className="note-list">
-        {unPinnedNotes.map((note) => (
-          <NotePreview note={note} onMoveToTrash={onMoveToTrash} onMoveToArchive={onMoveToArchive} onEdit={onEdit} onChangeColor={onChangeColor} onPinNote={onPinNote} key={note.id} onDuplicateNote={onDuplicateNote} />
-        ))}
+      <div className="note-lists-unpin">
+        <h6 className="list-title">{pinnedNotes.length > 0 && 'Others'}</h6>
+        <div className="note-list">
+          {unPinnedNotes.map((note) => (
+            <NotePreview note={note} onMoveToTrash={onMoveToTrash} onMoveToArchive={onMoveToArchive} onEdit={onEdit} onChangeColor={onChangeColor} onPinNote={onPinNote} key={note.id} onDuplicateNote={onDuplicateNote} />
+          ))}
+        </div>
       </div>
     </section>
   )

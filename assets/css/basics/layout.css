@@ -4,7 +4,7 @@
 
 .note-layout {
   display: grid;
-  grid-template-columns: 0.3fr 1.7fr 1fr;
+  grid-template-columns: 0.5fr 1.7fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
@@ -20,4 +20,21 @@
 
 .note-main {
   grid-area: main;
+}
+
+@media (min-width: 601px) and (max-width: 830px) {
+  .note-layout {
+    grid-template-columns: 0.1fr 1fr 1fr;
+  }
+}
+@media (min-width: 831px) and (max-width: 1100px) {
+  .note-layout {
+    grid-template-columns: 0.1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1101px) {
+  .note-layout {
+    grid-template-columns: 0.1fr 1.3fr 1fr;
+  }
 }

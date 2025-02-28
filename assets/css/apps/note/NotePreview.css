@@ -77,7 +77,8 @@
 }
 @media (min-width: 831px) and (max-width: 1100px) {
   .note-preview {
-    min-width: 28vw;
+    min-width: 26vw;
+    max-width: 26vw;
     margin-left: 10px;
     margin-right: 0px;
     margin-bottom: 8px;
