@@ -12,16 +12,27 @@ export const noteService = {
   deleteNote,
   getDefaultFilter,
   getDefaultNote,
+  getDefaultSearchParams,
+  moveToTrash,
+  moveToArchive,
+  restoreNote,
+  duplicateNote,
 }
 
-function getNotes(filterBy = getDefaultFilter()) {
+function getNotes(filterBy = {}) {
   return storageService.query(NOTES_KEY).then((notes) => {
-    if (filterBy.txt) {
-      const regex = new RegExp(filterBy.txt, 'i')
+    if (filterBy.title) {
+      const regex = new RegExp(filterBy.title, 'i')
       notes = notes.filter((note) => regex.test(note.info.txt) || regex.test(note.title))
     }
     if (filterBy.status) {
       notes = notes.filter((note) => note.status === filterBy.status)
+    }
+    if (filterBy.type) {
+      notes = notes.filter((note) => note.type === filterBy.type)
+    }
+    if (filterBy.color) {
+      notes = notes.filter((note) => note.style && note.style.backgroundColor === filterBy.color)
     }
     return notes
   })
@@ -46,10 +57,20 @@ function deleteNote(id) {
   return storageService.remove(NOTES_KEY, id)
 }
 
-function getDefaultFilter() {
-  return { txt: '', status: 'notes' }
+function getDefaultFilterParams() {
+  return { txt: '', title: '', status: 'notes', color: '', label: '', type: '' }
 }
-
+function getDefaultFilter() {
+  return { txt: '', title: '', color: '', label: '', type: '' }
+}
+function getDefaultSearchParams(searchParams) {
+  const defaultFilter = getDefaultFilter()
+  const filterBy = {}
+  for (const field in defaultFilter) {
+    filterBy[field] = searchParams.get(field) || defaultFilter[field]
+  }
+  return filterBy
+}
 function getDefaultNote() {
   return {
     id: null,
@@ -63,6 +84,11 @@ function getDefaultNote() {
     style: {},
     status: 'notes',
   }
+}
+function duplicateNote(note) {
+  const newNote = structuredClone(note)
+  newNote.id = utilService.makeId()
+  return newNote
 }
 
 function _createNote(txt, title = '', style = {}, status = 'notes') {
@@ -88,4 +114,25 @@ function _createNotes() {
     ]
     utilService.saveToStorage(NOTES_KEY, notes)
   }
+}
+
+function moveToTrash(noteId) {
+  return getNote(noteId).then((note) => {
+    note.status = 'trash'
+    return saveNote(note)
+  })
+}
+
+function moveToArchive(noteId) {
+  return getNote(noteId).then((note) => {
+    note.status = 'archive'
+    return saveNote(note)
+  })
+}
+
+function restoreNote(noteId) {
+  return getNote(noteId).then((note) => {
+    note.status = 'notes'
+    return saveNote(note)
+  })
 }

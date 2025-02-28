@@ -1,0 +1,16 @@
+.trash-note {
+  opacity: 0.8;
+  border: 1px solid #e0e0e0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.trash-note:hover {
+  opacity: 1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.empty-trash {
+  font-size: 1rem;
+  text-align: center;
+  color: #888;
+}

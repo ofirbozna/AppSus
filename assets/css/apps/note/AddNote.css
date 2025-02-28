@@ -1,8 +1,8 @@
 .add-note {
-  width: 90%;
+  width: 50%;
   max-width: 60vw;
-  margin: 15px auto;
-  padding: 8px;
+  margin: 40px auto 30px;
+  padding: 3px;
   background: white;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.627);
