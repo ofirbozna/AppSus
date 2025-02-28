@@ -4,6 +4,8 @@ export function NoteList({ notes, onMoveToTrash, onMoveToArchive, onEdit, onChan
 
   const pinnedNotes = notes.filter((note) => note.isPinned)
   const unPinnedNotes = notes.filter((note) => !note.isPinned)
+  console.log(pinnedNotes)
+  console.log(unPinnedNotes)
 
   return (
     <section className="note-lists-container">
