@@ -14,14 +14,15 @@ export function MailIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [filterBy, setFilterBy] = useState(mailsService.getFilterFromSearchParams(searchParams))
     const [isCompose, setIsCompose] = useState(false)
-    const [mailsCount, setMailsCount] =useState(0)
+    const [mailsCount, setMailsCount] = useState(0)
+    const [draftToEdit, setDraftToEdit] = useState(mailsService.getEmptyMail())
 
 
     useEffect(() => {
         setSearchParams(filterBy)
         loadMails()
         countUnreadMails()
-    }, [filterBy])
+    }, [filterBy,isCompose])
 
     function loadMails() {
         mailsService.query(filterBy)
@@ -64,9 +65,10 @@ export function MailIndex() {
 
     }
 
-    function onSetIsCompose() {
+    function onSetIsCompose(mail) {
+        setDraftToEdit(mail)
         setIsCompose(!isCompose)
-        loadMails()
+        // loadMails()
     }
 
     function countUnreadMails() {
@@ -80,10 +82,10 @@ export function MailIndex() {
     return <section className="mails-container">
         <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
         <MailSort onSortBy={onSortBy} />
-        <button className='compose-btn' onClick={onSetIsCompose}><i className="fa-solid fa-pencil"></i>Compose</button>
-        <MailList mails={mails} onRemove={removeMail} filterBy={filterBy} />
+        <button className='compose-btn' onClick={()=>onSetIsCompose(draftToEdit)}><i className="fa-solid fa-pencil"></i>Compose</button>
+        <MailList mails={mails} onRemove={removeMail} filterBy={filterBy} onSetIsCompose={onSetIsCompose} isCompose={isCompose} />
         <MailFolderList filterBy={filterBy} onSetFilterBy={onSetFilterBy} mailsCount={mailsCount} />
-        {isCompose && <MailCompose onSetIsCompose={onSetIsCompose} />}
+        {isCompose && <MailCompose onSetIsCompose={onSetIsCompose} draftToEdit={draftToEdit} />}
     </section>
 }
 

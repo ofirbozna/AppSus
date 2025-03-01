@@ -2,12 +2,12 @@ import { mailsService } from "../services/mail.service.js"
 
 
 const { useState, useEffect, useRef } = React
-export function MailCompose({ onSetIsCompose }) {
 
-    const [mailToCompose, setMailToCompose] = useState(mailsService.getEmptyMail())
+export function MailCompose({ onSetIsCompose,draftToEdit }) {
+
+    const [mailToCompose, setMailToCompose] = useState(draftToEdit)
     const mailToComposeRef = useRef(mailToCompose);
     mailToComposeRef.current = mailToCompose;
-    // console.log(mailToCompose)
 
     useEffect(() => {
         mailsService.save(mailToCompose)
