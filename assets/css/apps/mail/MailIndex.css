@@ -2,9 +2,10 @@
  .mails-container{
    display: grid;
    grid-template-columns: auto 1fr ;
-   grid-template-rows: auto 1fr;
+   grid-template-rows: auto  auto 1fr;
    grid-template-areas: 
    "compose-btn search"
+   "folder-list mail-sort"
    "folder-list mail-list";
     font-family: roboto;
     background-color: #f8fafe;

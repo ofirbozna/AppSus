@@ -23,9 +23,7 @@ export const mailsService = {
 function query(filterBy = {}) {
     return storageService.query(MAILS_KEY)
         .then(mails => {
-            console.log(filterBy.txt)
             if (filterBy.txt) {
-                console.log(filterBy.txt)
                 const regExp = new RegExp(filterBy.txt, 'i')
                 mails = mails.filter(mail =>
                     regExp.test(mail.subject) ||
@@ -86,7 +84,7 @@ function getEmptyMail(subject = '', body = '', to = '') {
         createdAt: Date.now(),
         subject,
         body,
-        isRead: false,
+        isRead: true,
         sentAt: Date.now(),
         removedAt: null,
         from: 'ofirNevo@appsus.com',
@@ -95,7 +93,6 @@ function getEmptyMail(subject = '', body = '', to = '') {
 }
 
 function getFilterFromSearchParams(searchParams) {
-    console.log('searchParams:', searchParams)
     const txt = searchParams.get('txt') || ''
     const isRead= searchParams.get('isRead') || ''
     const folder= searchParams.get('folder') || 'inbox'

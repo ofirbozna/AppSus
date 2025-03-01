@@ -5,7 +5,7 @@ const { useState, useEffect } = React
 export function MailCompose({ onSetIsCompose }) {
 
     const [mailToCompose, setMailToCompose] = useState(mailsService.getEmptyMail())
-    console.log(mailToCompose)
+ 
 
     function onHandleChange({ target }) {
         let { value, name } = target
@@ -15,9 +15,8 @@ export function MailCompose({ onSetIsCompose }) {
 
     function onSubmitMail(ev) {
         ev.preventDefault()
-        console.log('sent')
         mailsService.save(mailToCompose)
-        .then(onSetIsCompose())
+        .then(onSetIsCompose)
         
     }
 

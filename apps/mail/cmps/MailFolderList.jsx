@@ -5,7 +5,6 @@ const { useState,useEffect } = React
 export function MailFolderList({ filterBy, onSetFilterBy }) {
 
     const [filteByToEdit, setFilterByToEdit] = useState({ ...filterBy })
-    console.log(filteByToEdit)
 
     useEffect(() => {
         onSetFilterBy(filteByToEdit)
