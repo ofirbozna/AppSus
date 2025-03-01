@@ -15,7 +15,7 @@
     cursor: pointer;
 }
 
-.folder-list li:hover{
+.folder-list li:not(.selected):hover{
     background-color: rgb(242, 242, 242);
     border-radius: 0 20px 20px 0px;
   
@@ -23,4 +23,14 @@
 
 .folder-list i {
     margin-inline-end: 1.125rem;
+}
+
+.folder-list li span{
+    font-weight: bold;
+    margin-inline-start: 5rem;
+}
+
+.selected{
+    background-color: #d3e3fd;
+    border-radius: 0 20px 20px 0px;
 }
