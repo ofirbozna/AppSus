@@ -31,7 +31,7 @@ export function MailDetails() {
             <h3>{mail.subject}</h3>
             <div>
             <h4>{mail.from}</h4>
-            <h5>{getDate(mail.sentAt)}</h5>
+            <h5>{mail.sentAt? getDate(mail.sentAt):''}</h5>
             </div>
             <h5>{mail.to}</h5>
             <p>{mail.body}</p>

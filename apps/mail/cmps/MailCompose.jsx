@@ -1,11 +1,35 @@
 import { mailsService } from "../services/mail.service.js"
 
 
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 export function MailCompose({ onSetIsCompose }) {
 
     const [mailToCompose, setMailToCompose] = useState(mailsService.getEmptyMail())
- 
+    const mailToComposeRef = useRef(mailToCompose);
+    mailToComposeRef.current = mailToCompose;
+    // console.log(mailToCompose)
+
+    useEffect(() => {
+        mailsService.save(mailToCompose)
+            .then(setMailToCompose)
+    }, [])
+
+    useEffect(() => {
+        if (mailToCompose.sentAt) {
+            mailsService.save(mailToCompose)
+                .then(onSetIsCompose)
+        }
+    }, [mailToCompose]);
+
+    useEffect(() => {
+           const intervalId= setInterval(() => {
+               mailsService.save(mailToComposeRef.current)
+           }, 5000); 
+
+        return () => {
+            clearInterval(intervalId)
+        }
+    }, [])
 
     function onHandleChange({ target }) {
         let { value, name } = target
@@ -15,9 +39,7 @@ export function MailCompose({ onSetIsCompose }) {
 
     function onSubmitMail(ev) {
         ev.preventDefault()
-        mailsService.save(mailToCompose)
-        .then(onSetIsCompose)
-        
+        setMailToCompose(prevMail => ({ ...prevMail, sentAt: Date.now() }))
     }
 
     const { body, subject, to } = mailToCompose

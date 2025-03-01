@@ -47,7 +47,11 @@ function query(filterBy = {}) {
                 mails = mails.filter(mail => mail.removedAt !== null)
 
             if (filterBy.folder === 'sent') {
-                mails = mails.filter(mail => mail.to !== 'ofirNevo@appsus.com' && mail.removedAt === null)
+                mails = mails.filter(mail => mail.to !== 'ofirNevo@appsus.com' && mail.removedAt === null && mail.sentAt !== null)
+            }
+            if(filterBy.folder ==='drafts'){
+                mails = mails.filter(mail => mail.to !== 'ofirNevo@appsus.com' && mail.removedAt === null && mail.sentAt === null)
+
             }
 
             return mails
@@ -85,7 +89,7 @@ function getEmptyMail(subject = '', body = '', to = '') {
         subject,
         body,
         isRead: true,
-        sentAt: Date.now(),
+        sentAt: null,
         removedAt: null,
         from: 'ofirNevo@appsus.com',
         to,
