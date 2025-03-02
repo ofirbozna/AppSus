@@ -45,14 +45,7 @@ export function NoteImg({ note, onSaveNote }) {
         {(note.info && note.info.title) || ''}
       </h3>
       <div className="image-container" onClick={handleImageClick}>
-        {imageUrl ? (
-          <img src={imageUrl} alt={(note.info && note.info.title) || 'Image note'} />
-        ) : (
-          <div className="empty-image-placeholder">
-            <i className="fas fa-image"></i>
-            <p>Click to add an image</p>
-          </div>
-        )}
+        <img src={imageUrl} alt={(note.info && note.info.title) || 'Image note'} />
       </div>
       <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
     </section>

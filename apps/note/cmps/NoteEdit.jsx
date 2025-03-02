@@ -167,7 +167,7 @@ export function NoteEdit({ note, onClose, onUpdateNote }) {
                           textDecoration: isDone ? 'line-through' : 'none',
                           color: isDone ? '#80868b' : 'inherit',
                         }}
-                        className="todo-input rtl-text"
+                        className="todo-input"
                       />
                       {todoItems.length > 1 && (
                         <button
