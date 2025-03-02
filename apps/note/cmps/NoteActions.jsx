@@ -23,7 +23,7 @@ export function NoteActions({ note, onMoveToTrash, onMoveToArchive, onEdit, onCh
         <i className="fas fa-archive"></i>
       </button>
 
-      <button
+      {/* <button
         title="Edit"
         onClick={(e) => {
           e.stopPropagation()
@@ -31,7 +31,7 @@ export function NoteActions({ note, onMoveToTrash, onMoveToArchive, onEdit, onCh
         }}
       >
         <i className="fas fa-edit"></i>
-      </button>
+      </button> */}
 
       <div onClick={(e) => e.stopPropagation()}>
         <ColorPicker note={note} onChangeColor={onChangeColor} />
