@@ -66,6 +66,23 @@
 .pin-btn.pinned {
   color: #010101;
 }
+.image-content {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.image-preview {
+  margin: 10px 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.image-preview img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
 
 @media (min-width: 601px) and (max-width: 830px) {
   .note-preview {
