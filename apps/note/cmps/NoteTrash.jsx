@@ -1,5 +1,7 @@
 import { noteService } from '../services/note.service.js'
 import { NoteLayout } from './NoteLayout.jsx'
+import { NoteImg } from './NoteImg.jsx'
+import { NoteTodos } from './NoteTodos.jsx'
 
 const { useState, useEffect } = React
 
@@ -31,22 +33,39 @@ export function NoteTrash() {
             {notes.length === 0 ? (
               <p className="empty-trash">No notes in trash</p>
             ) : (
-              notes.map((note) => (
-                <div key={note.id} className="note-preview trash-note" style={{ backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white' }}>
-                  <h3>{note.title ? note.title : 'Untitled'}</h3>
-                  <p>{note.info && note.info.txt ? note.info.txt : 'No content'}</p>
-                  <div className="note-actions-wrapper">
-                    <div className="note-actions">
-                      <button onClick={() => onRestore(note.id)} title="Restore">
-                        <i className="fas fa-undo"></i>
-                      </button>
-                      <button onClick={() => onDeletePermanently(note.id)} title="Delete Forever">
-                        <i className="fas fa-trash-alt"></i>
-                      </button>
+              notes.map(function (note) {
+                return (
+                  <div
+                    key={note.id}
+                    className="note-preview trash-note"
+                    style={{
+                      backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white',
+                    }}
+                  >
+                    {note.type === 'note-img' ? (
+                      <NoteImg note={note} />
+                    ) : note.type === 'note-todos' ? (
+                      <NoteTodos note={note} />
+                    ) : (
+                      <div>
+                        <h3>{note.title || 'Untitled'}</h3>
+                        <p>{note.info && note.info.txt ? note.info.txt : 'No content'}</p>
+                      </div>
+                    )}
+
+                    <div className="note-actions-wrapper">
+                      <div className="note-actions">
+                        <button onClick={() => onRestore(note.id)} title="Restore">
+                          <i className="fas fa-undo"></i>
+                        </button>
+                        <button onClick={() => onDeletePermanently(note.id)} title="Delete Forever">
+                          <i className="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
+                )
+              })
             )}
           </div>
         </div>
