@@ -1,6 +1,14 @@
 import { NotePreview } from './NotePreview.jsx'
 
-export function NoteList({ notes, onMoveToTrash, onMoveToArchive, onEdit, onChangeColor, onPinNote, onDuplicateNote }) {
+export function NoteList({
+  notes,
+  onMoveToTrash,
+  onMoveToArchive,
+  onEdit,
+  onChangeColor,
+  onPinNote,
+  onDuplicateNote,
+}) {
   if (!notes || !notes.length) return <p>There is no notes...</p>
 
   const filteredNotes = notes.filter((note) => note.status === 'notes')
@@ -16,17 +24,37 @@ export function NoteList({ notes, onMoveToTrash, onMoveToArchive, onEdit, onChan
           <h6 className="list-title">Pinned</h6>
           <div className="note-list">
             {pinnedNotes.map((note) => (
-              <NotePreview key={note.id} note={note} onMoveToTrash={onMoveToTrash} onMoveToArchive={onMoveToArchive} onEdit={onEdit} onChangeColor={onChangeColor} onPinNote={onPinNote} onDuplicateNote={onDuplicateNote} />
+              <NotePreview
+                key={note.id}
+                note={note}
+                onMoveToTrash={onMoveToTrash}
+                onMoveToArchive={onMoveToArchive}
+                onEdit={onEdit}
+                onChangeColor={onChangeColor}
+                onPinNote={onPinNote}
+                onDuplicateNote={onDuplicateNote}
+              />
             ))}
           </div>
         </div>
       )}
       {unPinnedNotes.length > 0 && (
         <div className="note-lists-unpin">
-          <h6 className="list-title">{pinnedNotes.length > 0 ? 'Others' : 'Notes'}</h6>
+          <h6 className="list-title">
+            {pinnedNotes.length > 0 ? 'Others' : 'Notes'}
+          </h6>
           <div className="note-list">
             {unPinnedNotes.map((note) => (
-              <NotePreview key={note.id} note={note} onMoveToTrash={onMoveToTrash} onMoveToArchive={onMoveToArchive} onEdit={onEdit} onChangeColor={onChangeColor} onPinNote={onPinNote} onDuplicateNote={onDuplicateNote} />
+              <NotePreview
+                key={note.id}
+                note={note}
+                onMoveToTrash={onMoveToTrash}
+                onMoveToArchive={onMoveToArchive}
+                onEdit={onEdit}
+                onChangeColor={onChangeColor}
+                onPinNote={onPinNote}
+                onDuplicateNote={onDuplicateNote}
+              />
             ))}
           </div>
         </div>

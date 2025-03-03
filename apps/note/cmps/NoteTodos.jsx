@@ -20,7 +20,10 @@ export function NoteTodos({ note }) {
     if (!todos || !Array.isArray(todos)) return
 
     const updatedTodos = [...todos]
-    updatedTodos[index] = { ...updatedTodos[index], doneAt: updatedTodos[index].doneAt ? null : Date.now() }
+    updatedTodos[index] = {
+      ...updatedTodos[index],
+      doneAt: updatedTodos[index].doneAt ? null : Date.now(),
+    }
 
     setTodos(updatedTodos)
     note.info.todos = updatedTodos
@@ -36,8 +39,15 @@ export function NoteTodos({ note }) {
       return (
         <li key={index} className={isDone ? 'todo-done' : ''}>
           <div className="todo-item-container">
-            <input type="checkbox" checked={isDone} onChange={() => toggleTodoStatus(index)} className="todo-checkbox" />
-            <span className={isDone ? 'todo-text-done' : 'todo-text'}>{todo.txt}</span>
+            <input
+              type="checkbox"
+              checked={isDone}
+              onChange={() => toggleTodoStatus(index)}
+              className="todo-checkbox"
+            />
+            <span className={isDone ? 'todo-text-done' : 'todo-text'}>
+              {todo.txt}
+            </span>
           </div>
         </li>
       )
@@ -46,7 +56,12 @@ export function NoteTodos({ note }) {
 
   return (
     <section className="note-todos">
-      <h3 ref={titleRef} onKeyDown={(ev) => changeContentTitle(ev)} contentEditable={true} suppressContentEditableWarning={true}>
+      <h3
+        ref={titleRef}
+        onKeyDown={(ev) => changeContentTitle(ev)}
+        contentEditable={true}
+        suppressContentEditableWarning={true}
+      >
         {(note.info && note.info.label) || (note.info && note.info.title) || ''}
       </h3>
 

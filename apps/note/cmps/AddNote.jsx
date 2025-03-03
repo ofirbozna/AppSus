@@ -10,6 +10,7 @@ export function AddNote({ onAddNote }) {
   const [noteType, setNoteType] = useState('note-txt')
   const [file, setFile] = useState(null)
   const [imageUrl, setImageUrl] = useState('')
+  const [videoUrl, setVideoUrl] = useState('')
   const [todoItems, setTodoItems] = useState([''])
   const [showColorPicker, setShowColorPicker] = useState(false)
   const [fileInputKey, setFileInputKey] = useState(Date.now()) // Add a key to force re-render
@@ -26,7 +27,11 @@ export function AddNote({ onAddNote }) {
       }
 
       // Close color picker when clicking outside of it
-      if (colorPickerRef.current && !colorPickerRef.current.contains(event.target) && !event.target.closest('.icon-button.color-btn')) {
+      if (
+        colorPickerRef.current &&
+        !colorPickerRef.current.contains(event.target) &&
+        !event.target.closest('.icon-button.color-btn')
+      ) {
         setShowColorPicker(false)
       }
     }
@@ -42,6 +47,7 @@ export function AddNote({ onAddNote }) {
     // Validate based on note type
     if (noteType === 'note-txt' && !text.trim()) return
     if (noteType === 'note-img' && !imageUrl) return
+    if (noteType === 'note-video' && !videoUrl) return
 
     const filteredTodoItems = todoItems.filter((item) => item.trim())
     if (noteType === 'note-todos' && filteredTodoItems.length === 0) return
@@ -57,9 +63,16 @@ export function AddNote({ onAddNote }) {
     } else if (noteType === 'note-img') {
       newNote.info.title = title || 'Image Note'
       newNote.info.img = imageUrl
+    } else if (noteType === 'note-video') {
+      newNote.info.title = title || 'Video Note'
+      newNote.info.url = videoUrl
+      newNote.info.txt = text || ''
     } else if (noteType === 'note-todos') {
       newNote.info.label = title || 'Todo List'
-      newNote.info.todos = filteredTodoItems.map((txt) => ({ txt, doneAt: null }))
+      newNote.info.todos = filteredTodoItems.map((txt) => ({
+        txt,
+        doneAt: null,
+      }))
     }
 
     noteService
@@ -77,6 +90,7 @@ export function AddNote({ onAddNote }) {
     setBgColor('#ffffff')
     setIsExpanded(false)
     setImageUrl('')
+    setVideoUrl('')
     setTodoItems([''])
     setFile(null)
     setNoteType('note-txt')
@@ -135,10 +149,24 @@ export function AddNote({ onAddNote }) {
     }, 10)
   }
 
+  function switchToVideoMode() {
+    setNoteType('note-video')
+    setIsExpanded(true)
+  }
+
   function RenderNoteAddContent() {
     if (noteType === 'note-txt') {
-      return <textarea placeholder="Take a note..." value={text} onChange={(ev) => setText(ev.target.value)} />
+      return (
+        <textarea
+          placeholder="Take a note..."
+          value={text}
+          onChange={(ev) => setText(ev.target.value)}
+        />
+      )
     } else if (noteType === 'note-img') {
+      {
+        /*Image */
+      }
       return (
         <div className="image-content">
           {/* <textarea placeholder="Add a caption..." value={text} onChange={(ev) => setText(ev.target.value)} /> */}
@@ -149,15 +177,48 @@ export function AddNote({ onAddNote }) {
           )}
         </div>
       )
+      {
+        /*Video */
+      }
+    } else if (noteType === 'note-video') {
+      return (
+        <div className="video-content">
+          <input
+            type="text"
+            placeholder="Enter YouTube video URL..."
+            value={videoUrl}
+            onChange={(ev) => setVideoUrl(ev.target.value)}
+            className="video-url-input"
+          />
+          <textarea
+            placeholder="Add notes about this video..."
+            value={text}
+            onChange={(ev) => setText(ev.target.value)}
+          />
+        </div>
+      )
+      {
+        /*Todo list */
+      }
     } else if (noteType === 'note-todos') {
       return (
         <div className="todo-items">
           {todoItems.map((item, index) => (
             <div key={index} className="todo-item">
               <input type="checkbox" className="todo-checkbox" />
-              <input type="text" placeholder={`Item ${index + 1}`} value={item} onChange={(e) => handleTodoItemChange(index, e.target.value)} className="todo-input" />
+              <input
+                type="text"
+                placeholder={`Item ${index + 1}`}
+                value={item}
+                onChange={(e) => handleTodoItemChange(index, e.target.value)}
+                className="todo-input"
+              />
               {index > 0 && (
-                <button type="button" onClick={() => removeTodoItem(index)} className="remove-item-btn">
+                <button
+                  type="button"
+                  onClick={() => removeTodoItem(index)}
+                  className="remove-item-btn"
+                >
                   <i className="fas fa-times"></i>
                 </button>
               )}
@@ -169,7 +230,11 @@ export function AddNote({ onAddNote }) {
   }
 
   return (
-    <section ref={noteRef} className={`add-note ${isExpanded ? 'expanded' : ''}`} style={{ backgroundColor: bgColor }}>
+    <section
+      ref={noteRef}
+      className={`add-note ${isExpanded ? 'expanded' : ''}`}
+      style={{ backgroundColor: bgColor }}
+    >
       <form onSubmit={handleSubmit}>
         {!isExpanded ? (
           <div className="note-collapsed" onClick={() => setIsExpanded(true)}>
@@ -198,6 +263,19 @@ export function AddNote({ onAddNote }) {
               >
                 <i className="fas fa-image"></i>
               </button>
+
+              {/*Video */}
+              <button
+                type="button"
+                className="icon-button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  switchToVideoMode()
+                }}
+              >
+                <i className="fa-solid fa-video"></i>
+              </button>
+
               {/*Draw will add later */}
               <button type="button" className="icon-button">
                 <i className="fa-solid fa-pencil"></i>
@@ -206,7 +284,12 @@ export function AddNote({ onAddNote }) {
           </div>
         ) : (
           <div className="note-add-expanded">
-            <input type="text" placeholder="Title" value={title} onChange={(ev) => setTitle(ev.target.value)} />
+            <input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(ev) => setTitle(ev.target.value)}
+            />
 
             {RenderNoteAddContent()}
 
@@ -218,10 +301,20 @@ export function AddNote({ onAddNote }) {
                 <button type="button" className="icon-button">
                   <i className="fas fa-user-plus"></i>
                 </button>
-                <div className="icon-button color-btn " onClick={(e) => e.stopPropagation()}>
-                  <ColorPicker selectedColor={bgColor} onColorSelect={setBgColor} />
+                <div
+                  className="icon-button color-btn "
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ColorPicker
+                    selectedColor={bgColor}
+                    onColorSelect={setBgColor}
+                  />
                 </div>
-                <button type="button" className="icon-button" onClick={switchToImageMode}>
+                <button
+                  type="button"
+                  className="icon-button"
+                  onClick={switchToImageMode}
+                >
                   <i className="fas fa-image"></i>
                 </button>
                 <button type="button" className="icon-button">
@@ -233,7 +326,14 @@ export function AddNote({ onAddNote }) {
                 type="button"
                 className="close-btn"
                 onClick={() => {
-                  if ((noteType === 'note-txt' && text.trim()) || (noteType === 'note-img' && imageUrl) || (noteType === 'note-todos' && todoItems.some((item) => item.trim()))) {
+                  const hasContent =
+                    (noteType === 'note-txt' && text.trim()) ||
+                    (noteType === 'note-img' && imageUrl) ||
+                    (noteType === 'note-video' && videoUrl) ||
+                    (noteType === 'note-todos' &&
+                      todoItems.some((item) => item.trim()))
+
+                  if (hasContent) {
                     handleSubmit()
                   } else {
                     resetForm()
@@ -247,8 +347,15 @@ export function AddNote({ onAddNote }) {
         )}
       </form>
 
-      {/* Use a key to  re-render of the file input element */}
-      <input key={fileInputKey} ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+      {/* Use a key to re-render of the file input element */}
+      <input
+        key={fileInputKey}
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+        style={{ display: 'none' }}
+      />
     </section>
   )
 }
