@@ -14,6 +14,7 @@
 @import './apps/note/NoteList.css';
 @import './apps/note/NotePreview.css';
 @import './apps/note/NoteTrash.css';
+@import './apps/note/NoteTodoList.css';
 @import './apps/note/NoteArchive.css';
 @import './apps/note/NoteSideBar.css';
 @import './apps/note/AddNote.css';
