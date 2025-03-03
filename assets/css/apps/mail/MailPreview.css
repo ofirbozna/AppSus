@@ -3,8 +3,6 @@
     grid-template-columns: 200px max-content 1fr;
     gap: 0.3rem;
     padding-block: 0.625rem;
-    padding-inline: 2rem;
-    font-size: 0.875rem;
 }
 
 .mail-preview p{

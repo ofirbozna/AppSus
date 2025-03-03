@@ -1,46 +1,74 @@
-.mails-list{
+.mails-list {
     grid-area: mail-list;
     background-color: white;
 }
-.mails-list li:first-child{
-    border-block-start:  0.5px solid rgb(186, 186, 186);
+
+.mails-list li:first-child {
+    border-block-start: 0.5px solid rgb(186, 186, 186);
 
 }
 
 .mail-line {
-    display: flex;
-    justify-content: space-between;
-    border-block-end:  0.5px solid rgb(186, 186, 186);
+    /* display: flex; */
+    display: grid;
+    grid-template-columns: auto minmax(auto,1000px) 1fr;
+    align-items: center;
+    gap: 2rem;
+    border-block-end: 0.5px solid rgb(186, 186, 186);
     background-color: white;
+    font-size: 0.875rem;
+    padding-inline: 0.5rem;
+
 }
-.mail-line:hover{
+
+.mail-btns {
+    display: none;
+    justify-self: end;
+}
+
+.mail-date {
+    font-size: 0.75rem;
+    color:rgb(95, 99, 104);
+    width: 3rem;
+    justify-self: end;
+}
+
+.mail-line:hover .mail-btns {
+    display: flex;
+}
+
+.mail-line:hover .mail-date {
+    display: none;
+}
+
+.mail-line:hover {
     position: relative;
-    -webkit-box-shadow: 0px 3px 8px -4px rgba(189,189,189,1);
-    -moz-box-shadow: 0px 3px 8px -4px rgba(189,189,189,1);
-    box-shadow: 0px 3px 8px -4px rgba(189,189,189,1);
+    -webkit-box-shadow: 0px 3px 8px -4px rgba(189, 189, 189, 1);
+    -moz-box-shadow: 0px 3px 8px -4px rgba(189, 189, 189, 1);
+    box-shadow: 0px 3px 8px -4px rgba(189, 189, 189, 1);
     z-index: 2;
-    border-inline:0.5px solid rgb(186, 186, 186); ;
+    border-inline: 0.5px solid rgb(186, 186, 186);
 }
 
 
-.mail-line button.stared{
-   color: #f6c54c;
+.mail-line button.stared {
+    color: #f6c54c;
 }
 
-.mail-line button{
+.mail-line button {
     background-color: transparent;
     border: none;
     color: var(--gray2);
     cursor: pointer;
-    padding-inline: 0.5rem;
 }
 
-.mail-line.read{
+
+.mail-line.read {
     background-color: var(--mailBlue1);
     font-weight: 400;
 }
 
-.read h3,.read h4{
+.read h3,
+.read h4 {
     font-weight: 400;
 }
-
