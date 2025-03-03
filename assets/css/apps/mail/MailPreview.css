@@ -4,6 +4,7 @@
     gap: 0.3rem;
     padding-block: 0.625rem;
     padding-inline: 2rem;
+    font-size: 0.875rem;
 }
 
 .mail-preview p{
@@ -21,5 +22,5 @@
     overflow: hidden;       /* מסתיר את התוכן שיוצא מהרוחב */
     text-overflow: ellipsis; /* מוסיף "..." כשאין מקום */
     max-width: 100%;
-    font-size: 1rem;
+    font-size: 0.875rem;
 }

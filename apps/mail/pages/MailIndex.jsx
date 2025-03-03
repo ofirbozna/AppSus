@@ -22,7 +22,7 @@ export function MailIndex() {
         setSearchParams(filterBy)
         loadMails()
         countUnreadMails()
-    }, [filterBy,isCompose])
+    }, [filterBy, isCompose])
 
     function loadMails() {
         mailsService.query(filterBy)
@@ -71,7 +71,7 @@ export function MailIndex() {
         // loadMails()
     }
 
-    
+
     function onSetIsStared(mailId) {
         setMails(prevMails => {
             return prevMails.map(mail =>
@@ -82,7 +82,7 @@ export function MailIndex() {
             .then(mail => {
                 mail.isStared = !mail.isStared
                 mailsService.save(mail)
-        
+
             })
     }
 
@@ -94,13 +94,18 @@ export function MailIndex() {
             })
     }
 
+    function onOpenMenu(){
+
+    }
 
     return <section className="mails-container">
         <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
         <MailSort onSortBy={onSortBy} />
-        <button className='compose-btn' onClick={()=>onSetIsCompose(draftToEdit)}><i className="fa-solid fa-pencil"></i>Compose</button>
-        <MailList mails={mails} onRemove={removeMail} filterBy={filterBy} onSetIsCompose={onSetIsCompose} isCompose={isCompose} onSetIsStared={onSetIsStared}/>
-        <MailFolderList filterBy={filterBy} onSetFilterBy={onSetFilterBy} mailsCount={mailsCount} />
+        <MailList mails={mails} onRemove={removeMail} filterBy={filterBy} onSetIsCompose={onSetIsCompose} isCompose={isCompose} onSetIsStared={onSetIsStared} />
+        <section className="side-bar flex column">
+            <button className='compose-btn' onClick={() => onSetIsCompose(draftToEdit)}><i className="fa-solid fa-pencil"></i> <span>Compose</span></button>
+            <MailFolderList filterBy={filterBy} onSetFilterBy={onSetFilterBy} mailsCount={mailsCount} />
+        </section>
         {isCompose && <MailCompose onSetIsCompose={onSetIsCompose} draftToEdit={draftToEdit} />}
     </section>
 }

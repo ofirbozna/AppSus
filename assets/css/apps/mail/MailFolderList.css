@@ -1,36 +1,55 @@
 .folder-list {
-    grid-area: folder-list;
-    padding-block-start: 1rem;
-    min-width: 248px;
     color: #202124;
     font-size: 0.825rem;
-
 }
 
 .folder-list li {
-    padding-inline-start: 1.625rem;
-    align-content: center;
-    width: 85%;
+    display: flex;
+    justify-content: center;
     height: 2rem;
     cursor: pointer;
+    transition: all 200ms ease;
+    margin-inline-start: 1rem;
 }
 
-.folder-list li:not(.selected):hover{
+.folder-list li:not(.selected):hover {
     background-color: rgb(242, 242, 242);
     border-radius: 0 20px 20px 0px;
-  
+
 }
 
 .folder-list i {
-    margin-inline-end: 1.125rem;
+    align-content: center;
+    
 }
 
-.folder-list li span{
+.folder-list li span:nth-of-type(2) {
     font-weight: bold;
-    margin-inline-start: 5rem;
 }
 
-.selected{
+
+.selected {
     background-color: #d3e3fd;
-    border-radius: 0 20px 20px 0px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding-inline: 10px;
+}
+
+.side-bar:hover li{
+    display: grid;
+    grid-template-columns: 40px auto 1fr;
+    /* justify-content: start; */
+    align-items: center;
+    min-width: 220px;
+    padding-inline: 1.625rem;
+    margin-inline-start: 0
+}
+
+.side-bar:hover .selected{
+border-radius: 0 20px 20px 0px; ;
+}
+
+
+.side-bar:hover li span:nth-of-type(2){
+    margin-left: auto
 }

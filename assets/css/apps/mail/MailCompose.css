@@ -1,12 +1,16 @@
 .compose-btn {
-    grid-area:compose-btn ;
     justify-self: start;
+    align-self: start;
     background-color: #c4e7ff;
     border: none;
     padding-block: 1.2rem;
-    padding-inline: 2rem;
+    padding-inline: 1.3rem;
     border-radius: 16px;
     cursor: pointer;
+    margin-inline-start: 0.5rem;
+}
+.compose-btn span{
+    display: none;
 }
 
 .mail-compose {
