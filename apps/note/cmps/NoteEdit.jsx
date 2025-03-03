@@ -5,15 +5,23 @@ const { useState, useEffect } = React
 
 export function NoteEdit({ note, onClose, onUpdateNote }) {
   const [editedNote, setEditedNote] = useState({ ...note })
-  const [bgColor, setBgColor] = useState(note.style && note.style.backgroundColor ? note.style.backgroundColor : '#ffffff')
-  const [todoItems, setTodoItems] = useState(note.type === 'note-todos' && note.info.todos ? [...note.info.todos] : [])
+  const [bgColor, setBgColor] = useState(
+    note.style && note.style.backgroundColor
+      ? note.style.backgroundColor
+      : '#ffffff'
+  )
+  const [todoItems, setTodoItems] = useState(
+    note.type === 'note-todos' && note.info.todos ? [...note.info.todos] : []
+  )
 
   function handleChange(ev) {
     const { name, value } = ev.target
     setEditedNote(function (prevNote) {
       return {
         ...prevNote,
-        info: prevNote.info ? { ...prevNote.info, [name]: value } : { [name]: value },
+        info: prevNote.info
+          ? { ...prevNote.info, [name]: value }
+          : { [name]: value },
       }
     })
   }
@@ -119,7 +127,11 @@ export function NoteEdit({ note, onClose, onUpdateNote }) {
         onClose()
       }}
     >
-      <div className="modal-container" style={{ backgroundColor: bgColor }} onClick={handleContainerClick}>
+      <div
+        className="modal-container"
+        style={{ backgroundColor: bgColor }}
+        onClick={handleContainerClick}
+      >
         <form
           onClick={(e) => e.stopPropagation()}
           onSubmit={(ev) => {
@@ -127,32 +139,86 @@ export function NoteEdit({ note, onClose, onUpdateNote }) {
             handleSave()
           }}
         >
-          <input type="text" placeholder="Title" value={editedNote.title || ''} onChange={(ev) => setEditedNote({ ...editedNote, title: ev.target.value })} style={{ backgroundColor: bgColor }} className="rtl-text" />
+          <input
+            type="text"
+            placeholder="Title"
+            value={editedNote.title || ''}
+            onChange={(ev) =>
+              setEditedNote({ ...editedNote, title: ev.target.value })
+            }
+            style={{ backgroundColor: bgColor }}
+            className="rtl-text"
+          />
 
           {/* Text note textarea */}
-          {editedNote.type === 'note-txt' && <textarea name="txt" placeholder="Edit note..." value={getInfoValue('txt', '')} onChange={handleChange} style={{ backgroundColor: bgColor }} className="rtl-text" />}
+          {editedNote.type === 'note-txt' && (
+            <textarea
+              name="txt"
+              placeholder="Edit note..."
+              value={getInfoValue('txt', '')}
+              onChange={handleChange}
+              style={{ backgroundColor: bgColor }}
+              className="rtl-text"
+            />
+          )}
 
           {/* Image edit section */}
           {editedNote.type === 'note-img' && (
             <div className="image-edit" style={{ backgroundColor: bgColor }}>
-              <input type="text" name="title" placeholder="Image title" value={getInfoValue('title', '')} onChange={handleChange} style={{ backgroundColor: bgColor, marginBottom: '10px' }} className="rtl-text" />
-              {editedNote.info && editedNote.info.img && <img src={editedNote.info.img} alt={getInfoValue('title', 'Note image')} style={{ maxWidth: '100%', marginBottom: '10px' }} />}
-              <input type="file" accept="image/*" onChange={handleImageUpload} style={{ marginBottom: '10px' }} />
+              <input
+                type="text"
+                name="title"
+                placeholder="Image title"
+                value={getInfoValue('title', '')}
+                onChange={handleChange}
+                style={{ backgroundColor: bgColor, marginBottom: '10px' }}
+                className="rtl-text"
+              />
+              {editedNote.info && editedNote.info.img && (
+                <img
+                  src={editedNote.info.img}
+                  alt={getInfoValue('title', 'Note image')}
+                  style={{ maxWidth: '100%', marginBottom: '10px' }}
+                />
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                style={{ marginBottom: '10px' }}
+              />
             </div>
           )}
 
           {/* Todos edit section */}
           {editedNote.type === 'note-todos' && (
             <div className="todos-edit" style={{ backgroundColor: bgColor }}>
-              <input type="text" name="label" placeholder="List title" value={getInfoValue('label', '')} onChange={handleChange} style={{ backgroundColor: bgColor, marginBottom: '10px' }} className="rtl-text" />
+              <input
+                type="text"
+                name="label"
+                placeholder="List title"
+                value={getInfoValue('label', '')}
+                onChange={handleChange}
+                style={{ backgroundColor: bgColor, marginBottom: '10px' }}
+                className="rtl-text"
+              />
               <div className="todo-items">
                 {todoItems.map(function (todo, index) {
                   const isDone = todo.doneAt !== null
 
                   return (
-                    <div key={index} className="todo-item" style={{ display: 'flex', marginBottom: '5px' }}>
+                    <div
+                      key={index}
+                      className="todo-item"
+                      style={{ display: 'flex', marginBottom: '5px' }}
+                    >
                       <div className="todo-checkbox-container">
-                        <input type="checkbox" checked={isDone} onChange={() => toggleTodoStatus(index)} className="todo-checkbox" />
+                        <input
+                          type="checkbox"
+                          checked={isDone}
+                          onChange={() => toggleTodoStatus(index)}
+                          className="todo-checkbox"
+                        />
                       </div>
                       <input
                         type="text"

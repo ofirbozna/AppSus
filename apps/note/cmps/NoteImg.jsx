@@ -41,13 +41,27 @@ export function NoteImg({ note, onSaveNote }) {
 
   return (
     <section className="note-img css-fix">
-      <h3 ref={titleRef} onKeyUp={(ev) => changeContentTitle(ev)} contentEditable={true} suppressContentEditableWarning={true}>
+      <h3
+        ref={titleRef}
+        onKeyUp={(ev) => changeContentTitle(ev)}
+        contentEditable={true}
+        suppressContentEditableWarning={true}
+      >
         {(note.info && note.info.title) || ''}
       </h3>
       <div className="image-container" onClick={handleImageClick}>
-        <img src={imageUrl} alt={(note.info && note.info.title) || 'Image note'} />
+        <img
+          src={imageUrl}
+          alt={(note.info && note.info.title) || 'Image note'}
+        />
       </div>
-      <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+        style={{ display: 'none' }}
+      />
     </section>
   )
 }

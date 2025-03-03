@@ -5,7 +5,11 @@ import { NoteEdit } from '../cmps/NoteEdit.jsx'
 import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { NoteLayout } from '../cmps/NoteLayout.jsx'
 
-import { eventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
+import {
+  eventBusService,
+  showErrorMsg,
+  showSuccessMsg,
+} from '../../../services/event-bus.service.js'
 
 const { useState, useEffect } = React
 const { useSearchParams } = ReactRouterDOM
@@ -15,7 +19,9 @@ export function NoteIndex() {
   const [notes, setNotes] = useState(null)
   const [searchParams, setSearchParams] = useSearchParams()
   const [editingNote, setEditingNote] = useState(null)
-  const [filterBy, setFilterBy] = useState(noteService.getDefaultSearchParams(searchParams))
+  const [filterBy, setFilterBy] = useState(
+    noteService.getDefaultSearchParams(searchParams)
+  )
 
   useEffect(() => {
     loadNotes(filterBy)
@@ -31,7 +37,11 @@ export function NoteIndex() {
   }
 
   function onPinNote(noteId) {
-    setNotes((prevNotes) => prevNotes.map((note) => (note.id === noteId ? { ...note, isPinned: !note.isPinned } : note)))
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === noteId ? { ...note, isPinned: !note.isPinned } : note
+      )
+    )
 
     noteService.getNote(noteId).then((note) => {
       if (note) {
@@ -72,7 +82,9 @@ export function NoteIndex() {
   }
 
   function onUpdateNote(updatedNote) {
-    setNotes((prevNotes) => prevNotes.map((note) => (note.id === updatedNote.id ? updatedNote : note)))
+    setNotes((prevNotes) =>
+      prevNotes.map((note) => (note.id === updatedNote.id ? updatedNote : note))
+    )
     setEditingNote(null)
   }
 
@@ -88,7 +100,13 @@ export function NoteIndex() {
   }
 
   function onChangeColor(noteId, color) {
-    setNotes((prevNotes) => prevNotes.map((note) => (note.id === noteId ? { ...note, style: { backgroundColor: color } } : note)))
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === noteId
+          ? { ...note, style: { backgroundColor: color } }
+          : note
+      )
+    )
 
     noteService
       .getNote(noteId)
@@ -115,7 +133,9 @@ export function NoteIndex() {
       .then((newNote) => (duplicatedNote.id = newNote.id))
       .catch((err) => {
         console.log(err)
-        setNotes((prevNotes) => prevNotes.filter((currNote) => currNote.id !== duplicatedNote.id))
+        setNotes((prevNotes) =>
+          prevNotes.filter((currNote) => currNote.id !== duplicatedNote.id)
+        )
       })
     setNotes((prevNotes) => [duplicatedNote, ...prevNotes])
     showSuccessMsg('Note Duplicated Successfully')
@@ -126,8 +146,22 @@ export function NoteIndex() {
       <section className="notes-container">
         <NoteFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
         <AddNote onAddNote={onAddNote} />
-        <NoteList notes={notes} onMoveToTrash={onMoveToTrash} onEdit={onEdit} onChangeColor={onChangeColor} onPinNote={onPinNote} onMoveToArchive={onMoveToArchive} onDuplicateNote={onDuplicateNote} />
-        {editingNote && <NoteEdit note={editingNote} onClose={onCloseEdit} onUpdateNote={onUpdateNote} />}
+        <NoteList
+          notes={notes}
+          onMoveToTrash={onMoveToTrash}
+          onEdit={onEdit}
+          onChangeColor={onChangeColor}
+          onPinNote={onPinNote}
+          onMoveToArchive={onMoveToArchive}
+          onDuplicateNote={onDuplicateNote}
+        />
+        {editingNote && (
+          <NoteEdit
+            note={editingNote}
+            onClose={onCloseEdit}
+            onUpdateNote={onUpdateNote}
+          />
+        )}
       </section>
     </NoteLayout>
   )

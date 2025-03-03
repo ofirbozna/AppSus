@@ -1,6 +1,11 @@
 const { useState, useRef, useEffect } = React
 
-export function ColorPicker({ note, onChangeColor, selectedColor, onColorSelect }) {
+export function ColorPicker({
+  note,
+  onChangeColor,
+  selectedColor,
+  onColorSelect,
+}) {
   const [isOpen, setIsOpen] = useState(false)
   const colorMenuRef = useRef(null)
 
@@ -17,7 +22,10 @@ export function ColorPicker({ note, onChangeColor, selectedColor, onColorSelect 
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (colorMenuRef.current && !colorMenuRef.current.contains(event.target)) {
+      if (
+        colorMenuRef.current &&
+        !colorMenuRef.current.contains(event.target)
+      ) {
         setIsOpen(false)
       }
     }
@@ -74,7 +82,22 @@ export function ColorPicker({ note, onChangeColor, selectedColor, onColorSelect 
           }}
         >
           {colors.map((color) => (
-            <button type="button" key={color} className={`color-option ${isNoteMode ? (note.style && note.style.backgroundColor === color ? 'selected' : '') : selectedColor === color ? 'selected' : ''}`} style={{ backgroundColor: color }} onClick={(e) => handleColorSelect(color, e)} title={`Set to ${color === '#ffffff' ? 'default' : color}`} />
+            <button
+              type="button"
+              key={color}
+              className={`color-option ${
+                isNoteMode
+                  ? note.style && note.style.backgroundColor === color
+                    ? 'selected'
+                    : ''
+                  : selectedColor === color
+                  ? 'selected'
+                  : ''
+              }`}
+              style={{ backgroundColor: color }}
+              onClick={(e) => handleColorSelect(color, e)}
+              title={`Set to ${color === '#ffffff' ? 'default' : color}`}
+            />
           ))}
         </div>
       )}
