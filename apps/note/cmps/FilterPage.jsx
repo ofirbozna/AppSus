@@ -39,7 +39,14 @@ export function FilterPage() {
     setSearchParams('')
   }
 
-  const colors = ['#ffffff', '#ffcc80', '#80deea', '#ff8a80', '#a0c78c', '#e6b800']
+  const colors = [
+    '#ffffff',
+    '#ffcc80',
+    '#80deea',
+    '#ff8a80',
+    '#a0c78c',
+    '#e6b800',
+  ]
 
   return (
     <section className="filter-page">
@@ -51,23 +58,54 @@ export function FilterPage() {
       </div>
 
       <div className="search-container">
-        <input type="text" name="title" value={filterBy.title} onChange={handleChange} placeholder="Search notes..." className="search-input" />
+        <input
+          type="text"
+          name="title"
+          value={filterBy.title}
+          onChange={handleChange}
+          placeholder="Search notes..."
+          className="search-input"
+        />
       </div>
 
       <div className="filter-section">
         <h3>Types</h3>
         <div className="filter-types">
-          <div className={`filter-type ${filterBy.type === 'note-txt' ? 'selected' : ''}`} onClick={() => onSelectType('note-txt')}>
+          <div
+            className={`filter-type ${
+              filterBy.type === 'note-txt' ? 'selected' : ''
+            }`}
+            onClick={() => onSelectType('note-txt')}
+          >
             <div className="icon">✏️</div>
             <div className="label">Draw</div>
           </div>
-          <div className={`filter-type ${filterBy.type === 'note-img' ? 'selected' : ''}`} onClick={() => onSelectType('note-img')}>
+          <div
+            className={`filter-type ${
+              filterBy.type === 'note-img' ? 'selected' : ''
+            }`}
+            onClick={() => onSelectType('note-img')}
+          >
             <div className="icon">🖼️</div>
             <div className="label">Photo</div>
           </div>
-          <div className={`filter-type ${filterBy.type === 'note-todos' ? 'selected' : ''}`} onClick={() => onSelectType('note-todos')}>
+          <div
+            className={`filter-type ${
+              filterBy.type === 'note-todos' ? 'selected' : ''
+            }`}
+            onClick={() => onSelectType('note-todos')}
+          >
             <div className="icon">📋</div>
             <div className="label">List</div>
+          </div>
+          <div
+            className={`filter-type ${
+              filterBy.type === 'note-video' ? 'selected' : ''
+            }`}
+            onClick={() => onSelectType('note-video')}
+          >
+            <div className="icon">📹</div>
+            <div className="label">Video</div>
           </div>
         </div>
       </div>
@@ -76,7 +114,17 @@ export function FilterPage() {
         <h3>Colors</h3>
         <div className="color-options">
           {colors.map((color, idx) => (
-            <div key={idx} className={`color-option ${filterBy.color === color ? 'selected' : ''}`} style={{ backgroundColor: color, border: color === '#ffffff' ? '1px solid #ccc' : 'none' }} onClick={() => onSelectColor(color)} />
+            <div
+              key={idx}
+              className={`color-option ${
+                filterBy.color === color ? 'selected' : ''
+              }`}
+              style={{
+                backgroundColor: color,
+                border: color === '#ffffff' ? '1px solid #ccc' : 'none',
+              }}
+              onClick={() => onSelectColor(color)}
+            />
           ))}
         </div>
       </div>
