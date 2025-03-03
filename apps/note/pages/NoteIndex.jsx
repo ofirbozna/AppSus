@@ -3,7 +3,8 @@ import { NoteList } from '../cmps/NoteList.jsx'
 import { AddNote } from '../cmps/AddNote.jsx'
 import { NoteEdit } from '../cmps/NoteEdit.jsx'
 import { NoteFilter } from '../cmps/NoteFilter.jsx'
-import { NotesSidebar } from '../cmps/NotesSideBar.jsx'
+import { NoteLayout } from '../cmps/NoteLayout.jsx'
+
 import { eventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
 const { useState, useEffect } = React
@@ -121,18 +122,13 @@ export function NoteIndex() {
   }
 
   return (
-    <div className="note-layout">
-      <div className="note-side-bar">
-        <NotesSidebar />
-      </div>
-      <div className="note-main">
-        <section className="notes-container">
-          <NoteFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
-          <AddNote onAddNote={onAddNote} />
-          <NoteList notes={notes} onMoveToTrash={onMoveToTrash} onEdit={onEdit} onChangeColor={onChangeColor} onPinNote={onPinNote} onMoveToArchive={onMoveToArchive} onDuplicateNote={onDuplicateNote} />
-          {editingNote && <NoteEdit note={editingNote} onClose={onCloseEdit} onUpdateNote={onUpdateNote} />}
-        </section>
-      </div>
-    </div>
+    <NoteLayout>
+      <section className="notes-container">
+        <NoteFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+        <AddNote onAddNote={onAddNote} />
+        <NoteList notes={notes} onMoveToTrash={onMoveToTrash} onEdit={onEdit} onChangeColor={onChangeColor} onPinNote={onPinNote} onMoveToArchive={onMoveToArchive} onDuplicateNote={onDuplicateNote} />
+        {editingNote && <NoteEdit note={editingNote} onClose={onCloseEdit} onUpdateNote={onUpdateNote} />}
+      </section>
+    </NoteLayout>
   )
 }
