@@ -71,6 +71,21 @@ export function MailIndex() {
         // loadMails()
     }
 
+    
+    function onSetIsStared(mailId) {
+        setMails(prevMails => {
+            return prevMails.map(mail =>
+                mail.id === mailId ? { ...mail, isStared: !mail.isStared } : mail
+            )
+        })
+        mailsService.get(mailId)
+            .then(mail => {
+                mail.isStared = !mail.isStared
+                mailsService.save(mail)
+        
+            })
+    }
+
     function countUnreadMails() {
         mailsService.query()
             .then(mails => {
@@ -79,11 +94,12 @@ export function MailIndex() {
             })
     }
 
+
     return <section className="mails-container">
         <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
         <MailSort onSortBy={onSortBy} />
         <button className='compose-btn' onClick={()=>onSetIsCompose(draftToEdit)}><i className="fa-solid fa-pencil"></i>Compose</button>
-        <MailList mails={mails} onRemove={removeMail} filterBy={filterBy} onSetIsCompose={onSetIsCompose} isCompose={isCompose} />
+        <MailList mails={mails} onRemove={removeMail} filterBy={filterBy} onSetIsCompose={onSetIsCompose} isCompose={isCompose} onSetIsStared={onSetIsStared}/>
         <MailFolderList filterBy={filterBy} onSetFilterBy={onSetFilterBy} mailsCount={mailsCount} />
         {isCompose && <MailCompose onSetIsCompose={onSetIsCompose} draftToEdit={draftToEdit} />}
     </section>

@@ -15,10 +15,15 @@
 }
 
 
+.mail-line button.stared{
+   color: #f6c54c;
+}
+
 .mail-line button{
     background-color: transparent;
     border: none;
     color: var(--gray2);
+    cursor: pointer;
 }
 
 .mail-line.read{
@@ -26,7 +31,7 @@
     font-weight: 400;
 }
 
-.read h3,.read h4
-{
+.read h3,.read h4{
     font-weight: 400;
 }
+

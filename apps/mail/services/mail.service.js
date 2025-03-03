@@ -49,9 +49,10 @@ function query(filterBy = {}) {
             if (filterBy.folder === 'sent') {
                 mails = mails.filter(mail => mail.to !== 'ofirNevo@appsus.com' && mail.removedAt === null && mail.sentAt !== null)
             }
-            if(filterBy.folder ==='drafts'){
+            if (filterBy.folder === 'drafts') {
                 mails = mails.filter(mail => mail.to !== 'ofirNevo@appsus.com' && mail.removedAt === null && mail.sentAt === null)
-
+            }  if (filterBy.folder === 'starred') {
+                mails = mails.filter(mail => mail.isStared === true)
             }
 
             return mails
@@ -89,6 +90,7 @@ function getEmptyMail(subject = '', body = '', to = '') {
         subject,
         body,
         isRead: true,
+        isStarred: false,
         sentAt: null,
         removedAt: null,
         from: 'ofirNevo@appsus.com',
@@ -98,10 +100,10 @@ function getEmptyMail(subject = '', body = '', to = '') {
 
 function getFilterFromSearchParams(searchParams) {
     const txt = searchParams.get('txt') || ''
-    const isRead= searchParams.get('isRead') || ''
-    const folder= searchParams.get('folder') || 'inbox'
+    const isRead = searchParams.get('isRead') || ''
+    const folder = searchParams.get('folder') || 'inbox'
 
-    return { txt, isRead,folder }
+    return { txt, isRead, folder }
 }
 function _createMails() {
     const mails = utilService.loadFromStorage(MAILS_KEY) || []
@@ -114,6 +116,7 @@ function _createMails() {
             subject: utilService.makeLorem(3),
             body: utilService.makeLorem(utilService.getRandomIntInclusive(10, 50)),
             isRead: false,
+            isStared: false,
             sentAt: Date.now(),
             removedAt: null,
             from: utilService.getRandonEmail(),
