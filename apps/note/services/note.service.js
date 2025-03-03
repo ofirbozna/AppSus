@@ -33,7 +33,8 @@ function getNotes(filterBy) {
           return regex.test(note.info.txt) || regex.test(note.title)
         } else if (note.type === 'note-todos') {
           const hasTitleMatch = regex.test(note.title)
-          const hasLabelMatch = note.info && note.info.label && regex.test(note.info.label)
+          const hasLabelMatch =
+            note.info && note.info.label && regex.test(note.info.label)
 
           const hasTodoMatch =
             note.info &&
@@ -44,7 +45,10 @@ function getNotes(filterBy) {
 
           return hasTitleMatch || hasLabelMatch || hasTodoMatch
         } else if (note.type === 'note-img') {
-          return regex.test(note.title) || (note.info && note.info.title && regex.test(note.info.title))
+          return (
+            regex.test(note.title) ||
+            (note.info && note.info.title && regex.test(note.info.title))
+          )
         }
         return regex.test(note.title)
       })
@@ -110,7 +114,7 @@ function getDefaultNote(createdAt) {
   return {
     id: null,
     title: '',
-    createdAt: createdAt,
+    createdAt,
     type: 'note-txt',
     isPinned: false,
     info: {
@@ -164,82 +168,139 @@ function duplicateNote(note) {
   return newNote
 }
 
-function _createNote(txt, title, style, status, type) {
-  if (!title) title = ''
-  if (!style) style = {}
-  if (!status) status = 'notes'
-  if (!type) type = 'note-txt'
-
-  const note = getDefaultNote()
-  note.id = utilService.makeId()
-  note.type = type
-
-  if (type === 'note-txt') {
-    note.info.txt = txt
-  } else if (type === 'note-todos') {
-    note.info = {
-      label: title,
-      todos: txt.split(',').map(function (item) {
-        return { txt: item.trim(), doneAt: null }
-      }),
-    }
-  } else if (type === 'note-img') {
-    note.info = {
-      title: title,
-      img: txt,
-    }
+function _createNote({
+  title = '',
+  content = '',
+  description = '',
+  type = 'note-txt',
+  style = {},
+  status = 'notes',
+}) {
+  const note = {
+    id: utilService.makeId(),
+    title,
+    createdAt: Date.now(),
+    type,
+    isPinned: false,
+    style,
+    status,
+    info: {},
   }
 
-  note.title = title
-  note.style = style
-  note.status = status
+  if (type === 'note-txt') {
+    note.info.txt = content
+  } else if (type === 'note-todos') {
+    note.info.label = title
+    note.info.todos = content
+      .split(',')
+      .map((txt) => ({ txt: txt.trim(), doneAt: null }))
+  } else if (type === 'note-img') {
+    note.info.title = title
+    note.info.img = content
+  } else if (type === 'note-video') {
+    note.info.title = title
+    note.info.url = content
+    note.info.txt = description
+  }
+
   return note
 }
+// function _createTodoNote(title, todos, style, status) {
+//   if (!style) style = {}
+//   if (!status) status = 'notes'
 
-function _createTodoNote(title, todos, style, status) {
-  if (!style) style = {}
-  if (!status) status = 'notes'
+//   const note = getEmptyTodoNote()
+//   note.id = utilService.makeId()
+//   note.info.label = title
+//   note.info.todos = todos.map((txt) => {
+//     return { txt: txt, doneAt: null }
+//   })
+//   note.title = title
+//   note.style = style
+//   note.status = status
+//   return note
+// }
 
-  const note = getEmptyTodoNote()
-  note.id = utilService.makeId()
-  note.info.label = title
-  note.info.todos = todos.map(function (txt) {
-    return { txt: txt, doneAt: null }
-  })
-  note.title = title
-  note.style = style
-  note.status = status
-  return note
-}
+// function _createImageNote(title, imgUrl, style, status) {
+//   if (!style) style = {}
+//   if (!status) status = 'notes'
 
-function _createImageNote(title, imgUrl, style, status) {
-  if (!style) style = {}
-  if (!status) status = 'notes'
-
-  const note = getEmptyImageNote()
-  note.id = utilService.makeId()
-  note.info.title = title
-  note.info.img = imgUrl
-  note.title = title
-  note.style = style
-  note.status = status
-  return note
-}
+//   const note = getEmptyImageNote()
+//   note.id = utilService.makeId()
+//   note.info.title = title
+//   note.info.img = imgUrl
+//   note.title = title
+//   note.style = style
+//   note.status = status
+//   return note
+// }
 
 function _createNotes() {
   let notes = utilService.loadFromStorage(NOTES_KEY)
   if (!notes || !notes.length) {
     notes = [
-      _createNote('I told my wife she should embrace her mistakes. She gave me a hug.', 'Marriage Advice'),
-      _createNote('Adults are always asking children what they want to be when they grow up because theyre looking for ideas', 'Deep Thoughts'),
-      _createTodoNote('Shopping List', ['Milk', 'Eggs', 'Bread', 'Coffee']),
-      _createImageNote('Roberto Firmeno', 'https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcT3tuC6EWkh91DJKKHa6g06r7HX4JcbckHKyLYr-FWe0_HMhM_y-pBiAlFiLV6duuF1ms9KkYvhSoDHOj0'),
-      _createNote('Some people graduate with honors, I am just honored to graduate.', 'School Struggles'),
-      _createTodoNote('Home Tasks', ['Clean kitchen', 'Mow lawn', 'Fix doorbell']),
-      _createNote('If you think nobody cares if youre alive, try missing a couple of payments.', 'Life Hack'),
-      _createNote('Never let your best friends get lonely, keep disturbing them.', 'Advice'),
-      _createNote('Friends buy you food. Best friends eat your food.', 'Truth'),
-      _createNote('Im not arguing, Im just explaining why Im right.', 'Debate Club'),
+      _createNote({
+        title: 'Marriage Advice',
+        content:
+          'I told my wife she should embrace her mistakes. She gave me a hug.',
+        status: 'trash',
+      }),
+      _createNote({
+        title: 'Deep Thoughts',
+        content:
+          'Adults are always asking children what they want to be when they grow up because theyre looking for ideas',
+        status: 'archive',
+      }),
+      _createNote({
+        title: 'Shopping List',
+        content: 'Milk,Eggs,Bread,Coffee',
+        type: 'note-todos',
+      }),
+      _createNote({
+        title: 'Need to do',
+        content: 'Add draw note,Add audio note,Add map note',
+        type: 'note-todos',
+      }),
+      _createNote({
+        title: 'Fede Valverde',
+        content:
+          'https://cdn.vox-cdn.com/thumbor/xnYOPeoJQevlZUfH9k26Ay-m-xk=/0x0:4500x3000/1820x1213/filters:focal(1890x1140:2610x1860):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/73932043/2201037656.0.jpg',
+        type: 'note-img',
+      }),
+      _createNote({
+        title: ' The debate',
+        content: 'https://www.youtube.com/watch?v=u48q8xYOCDY&t=10s',
+        description: 'Ronaldo is the 🐐',
+        type: 'note-video',
+      }),
+      _createNote({
+        title: 'School Struggles',
+        content:
+          'Some people graduate with honors, I am just honored to graduate.',
+      }),
+      _createNote({
+        title: 'Home Tasks',
+        content: 'Clean kitchen,Mow lawn,Fix doorbell',
+        type: 'note-todos',
+      }),
+      _createNote({
+        title: 'Life Hack',
+        content:
+          'If you think nobody cares if youre alive, try missing a couple of payments.',
+      }),
+      _createNote({
+        title: 'Advice',
+        content:
+          'Never let your best friends get lonely, keep disturbing them.',
+      }),
+      _createNote({
+        title: 'Truth',
+        content: 'Friends buy you food. Best friends eat your food.',
+      }),
+      _createNote({
+        title: 'Debate Club',
+        content: 'Im not arguing, Im just explaining why Im right.',
+      }),
     ]
     utilService.saveToStorage(NOTES_KEY, notes)
   }

@@ -2,6 +2,7 @@ import { noteService } from '../services/note.service.js'
 import { NoteLayout } from './NoteLayout.jsx'
 import { NoteImg } from './NoteImg.jsx'
 import { NoteTodos } from './NoteTodos.jsx'
+import { NoteVideo } from './NoteVideo.jsx'
 
 const { useState, useEffect } = React
 
@@ -39,26 +40,41 @@ export function NoteTrash() {
                     key={note.id}
                     className="note-preview trash-note"
                     style={{
-                      backgroundColor: note.style && note.style.backgroundColor ? note.style.backgroundColor : 'white',
+                      backgroundColor:
+                        note.style && note.style.backgroundColor
+                          ? note.style.backgroundColor
+                          : 'white',
                     }}
                   >
                     {note.type === 'note-img' ? (
                       <NoteImg note={note} />
                     ) : note.type === 'note-todos' ? (
                       <NoteTodos note={note} />
+                    ) : note.type === 'note-video' ? (
+                      <NoteVideo note={note} />
                     ) : (
                       <div>
                         <h3>{note.title || 'Untitled'}</h3>
-                        <p>{note.info && note.info.txt ? note.info.txt : 'No content'}</p>
+                        <p>
+                          {note.info && note.info.txt
+                            ? note.info.txt
+                            : 'No content'}
+                        </p>
                       </div>
                     )}
 
                     <div className="note-actions-wrapper">
                       <div className="note-actions">
-                        <button onClick={() => onRestore(note.id)} title="Restore">
+                        <button
+                          onClick={() => onRestore(note.id)}
+                          title="Restore"
+                        >
                           <i className="fas fa-undo"></i>
                         </button>
-                        <button onClick={() => onDeletePermanently(note.id)} title="Delete Forever">
+                        <button
+                          onClick={() => onDeletePermanently(note.id)}
+                          title="Delete Forever"
+                        >
                           <i className="fas fa-trash-alt"></i>
                         </button>
                       </div>

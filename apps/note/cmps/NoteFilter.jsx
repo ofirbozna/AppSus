@@ -26,7 +26,15 @@ export function NoteFilter({ filterBy }) {
   return (
     <section className="filter-container">
       <div className="search-bar" onClick={navigateToFilterPage}>
-        <input className="search-bar-input" name="title" value={filterByToEdit.title} onChange={onHandleChange} type="text" placeholder="Search notes..." readOnly />
+        <input
+          className="search-bar-input"
+          name="title"
+          value={filterByToEdit.title}
+          onChange={onHandleChange}
+          type="text"
+          placeholder="Search notes..."
+          readOnly
+        />
       </div>
     </section>
   )
