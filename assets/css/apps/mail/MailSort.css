@@ -1,0 +1,12 @@
+.mail-sort{
+    grid-area: mail-sort;
+    background-color: white;
+    padding: 0.5rem;
+    border-radius:15px 15px 0 0;
+}
+
+.mail-sort select{
+    border-radius: 10px;
+    padding: 0.1rem;
+    border-color: var(--gray1);
+}

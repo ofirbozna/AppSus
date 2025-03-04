@@ -1,0 +1,39 @@
+.mail-filter form {
+    display: grid;
+    position: relative;
+}
+
+.mail-filter input {
+    background-color: #e9edf6;
+    border: none;
+    border-radius: 24px;
+    min-height: 48px;
+    max-width: 720px;
+    padding-inline-start: 2.5rem;
+    margin-block-end: 1rem;
+}
+
+.mail-filter input:focus-visible {
+    background-color: white;
+    outline: none;
+    -webkit-box-shadow: 4px 3px 8px 0px rgba(189,189,189,1);
+    -moz-box-shadow: 4px 3px 8px 0px rgba(189,189,189,1);
+    box-shadow: 4px 3px 8px 0px rgba(189,189,189,1);
+}
+
+.filter-by-read {
+    grid-area: mail-sort;
+    justify-self: start;
+    margin-inline-start: 5rem;
+    z-index: 1;
+    align-self: center;
+    border-radius: 10px;
+    padding: 0.1rem;
+    border-color: var(--gray1);
+}
+
+.fa-magnifying-glass {
+    position: absolute;
+    top: 0.9rem;
+    left: 1rem
+}

@@ -1,0 +1,97 @@
+.compose-btn {
+    justify-self: start;
+    align-self: start;
+    background-color: #c4e7ff;
+    border: none;
+    padding-block: 1.2rem;
+    padding-inline: 1.3rem;
+    border-radius: 16px;
+    cursor: pointer;
+    margin-inline-start: 0.5rem;
+}
+.compose-btn span{
+    display: none;
+}
+
+.mail-compose {
+    position: fixed;
+    left: 70px;
+    bottom: 0;
+    width: 490px;
+    height: 480px;
+    background-color: white;
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, .14),
+        0 3px 14px 2px rgba(0, 0, 0, .12),
+        0 5px 5px -3px rgba(0, 0, 0, .2);
+}
+
+
+.mail-compose h1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background-color: #f2f6fc;
+    padding-block: 0.625rem;
+}
+
+.mail-compose h1 button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.mail-compose form {
+    display: grid;
+
+    height: 90%;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
+}
+
+.mail-compose label {
+    width: max-content;
+    border-bottom: 1px solid var(--gray2);
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--gray4);
+}
+
+.mail-compose input {
+    border: none;
+    border-bottom: 1px solid var(--gray1);
+    padding: 0.5rem;
+}
+
+.mail-compose input::placeholder{
+    color: var(--gray4);
+}
+
+.mail-compose input:nth-child(3) {
+    grid-column: 1/3;
+}
+
+.mail-compose textarea {
+    grid-column: 1/3;
+    border: none;
+}
+
+.mail-compose form button {
+    grid-column: 1/3;
+    justify-self: start;
+    background-color: #0f57d1;
+    color: white;
+    border: none;
+    min-height: 36px;
+    padding-inline: 1.2rem;
+    border-radius: 18px;
+    margin-inline-start: 0.5rem;
+    cursor: pointer;
+}
+
+.mail-compose input:focus-visible {
+    outline: none;
+}
+
+.mail-compose textarea:focus-visible{
+    outline: none;
+}
