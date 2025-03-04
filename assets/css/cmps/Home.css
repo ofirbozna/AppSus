@@ -1,33 +1,108 @@
- /* home */
-
-.home {
-    background-color: var(--bg2);
+.home-container {
+  font-family: roboto;
+  text-align: center;
+  padding: 20px;
+  margin: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.home .box-container {
-    padding: 1em 0;
+.home-page-header {
+  font-size: 6rem;
+  opacity: 0;
+  animation: zoomIn 2s forwards;
 }
 
-.home .box1 {
-    background-color: var(--color1);
-    min-height: 10em;
+.home-container h5 {
+  font-size: 1.5rem;
+  color: gray;
 }
 
-.home .box2 {
-    background-color: var(--color2);
-    min-height: 10em;
+.apps-container {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  animation: zoomIn 2s;
+}
+.home-logo {
+  margin-left: 20px;
+  width: 120px;
+}
+.home-logo.home-book-logo {
+  width: 70px;
+  margin-bottom: 15px;
 }
 
- @media (min-width: 750px) {
-    .home .box-container {
-        display: flex;
-        flex-direction: row-reverse;
-    }
-    .home .box1 {
-        flex: 1
-    }
-    .home .box2 {
-        width: 30vw;
-    }
-    
+.home-logo-box:hover {
+  animation: pulse 1s;
+}
+
+.home-container h4 {
+  color: gray;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.home-container h4 span {
+  color: rgb(92, 90, 90);
+}
+
+/* MOBILE ONLY */
+@media (max-width: 640px) {
+  .home-container {
+    margin-top: 150px;
+    /* margin: 50px 50px; */
+  }
+  .home-container h4 {
+    font-size: 1rem;
+  }
+}
+
+/* SMALL */
+@media (min-width: 640px) {
+  .home-logo {
+    width: 200px;
+  }
+  .home-logo.home-book-logo {
+    width: 120px;
+    margin-bottom: 25px;
+  }
+}
+
+/* MEDIUM */
+@media (min-width: 940px) {
+  .home-logo {
+    width: 300px;
+  }
+  .home-logo.home-book-logo {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
