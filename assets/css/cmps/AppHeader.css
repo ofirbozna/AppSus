@@ -1,16 +1,37 @@
 .app-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
-    background: var(--bg1);
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  /* background: var(--bg1); */
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.291);
 }
 
-nav a {
-    margin: .5em;
+.header-nav a {
+  margin: 0.5em;
 }
 
-nav a.active {
-    color: var(--color1);
-    font-weight: bold;
-    text-decoration: overline;
+.header-nav a.active {
+  color: var(--color1);
+  font-weight: bold;
+  text-decoration: overline;
+}
+.app-logo {
+  width: 100px;
+  object-fit: fill;
+}
+.app-logo.logo-size {
+  width: 95px;
+  height: 5.5vh;
+}
+@media (min-width: 601px) and (max-width: 830px) {
+  .app-logo {
+    width: 100px;
+  }
+}
+
+@media (min-width: 831px) {
+  .app-logo {
+    width: 120px;
+  }
 }
