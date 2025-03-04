@@ -1,0 +1,184 @@
+/* Base Styles - Mobile First */
+.container.about {
+  text-align: center;
+  padding: 30px 15px;
+}
+
+.about-title {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.about-description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Stack boxes vertically on small screens */
+.app-boxes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.app-box {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease-in-out;
+}
+
+.about-app-mail-logo,
+.about-app-books-logo,
+.about-app-note-logo {
+  width: 80%;
+  height: 60px;
+  margin-bottom: 8px;
+  object-fit: contain;
+}
+
+.app-title {
+  font-size: 20px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.app-description {
+  font-size: 14px;
+  color: #666;
+}
+
+.books {
+  border-top: 5px solid #ff6b6b;
+}
+
+.mail {
+  border-top: 5px solid #4dabf7;
+}
+
+.keepy {
+  border-top: 5px solid #ffc107;
+}
+
+/* About Us Title */
+.about-us {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 40px;
+  color: #333;
+}
+
+/* Profiles - Stack on small screens */
+.profiles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.profile {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.profile-pic.circular {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.profile-name {
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.profile-description {
+  font-size: 14px;
+  color: #555;
+}
+
+/* ----------- Tablet: min-width 640px ----------- */
+@media (min-width: 640px) {
+  .container.about {
+    padding: 40px 20px;
+  }
+
+  .about-title {
+    font-size: 26px;
+  }
+  .about-app-books-logo {
+    width: 100px;
+    height: 45px;
+  }
+  .app-boxes {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .app-box {
+    width: 45%;
+    max-width: 280px;
+  }
+
+  .profiles {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .profile {
+    width: 45%;
+    max-width: 280px;
+  }
+}
+
+/* ----------- Desktop: min-width 940px ----------- */
+@media (min-width: 940px) {
+  .container.about {
+    padding: 50px 30px;
+  }
+
+  .about-title {
+    font-size: 28px;
+  }
+
+  .app-boxes {
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .app-box {
+    width: 250px;
+  }
+  .about-app-books-logo {
+    width: 120px;
+    height: 60px;
+  }
+  .profiles {
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .profile {
+    width: 280px;
+  }
+}
