@@ -10,6 +10,7 @@
     min-height: 48px;
     max-width: 720px;
     padding-inline-start: 2.5rem;
+    margin-block-end: 1rem;
 }
 
 .mail-filter input:focus-visible {

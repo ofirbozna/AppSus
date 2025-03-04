@@ -9,10 +9,6 @@
 }
 
 .mail-line {
-    /* display: flex; */
-    display: grid;
-    grid-template-columns: auto minmax(auto,1000px) 1fr;
-    align-items: center;
     gap: 2rem;
     border-block-end: 0.5px solid rgb(186, 186, 186);
     background-color: white;
@@ -71,4 +67,8 @@
 .read h3,
 .read h4 {
     font-weight: 400;
+}
+
+.star{
+    justify-self: start;
 }

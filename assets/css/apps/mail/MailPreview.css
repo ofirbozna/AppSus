@@ -1,9 +1,10 @@
-.mail-preview{
+/* .mail-preview{
     display: grid;
     grid-template-columns: 200px max-content 1fr;
     gap: 0.3rem;
     padding-block: 0.625rem;
-}
+} */
+
 
 .mail-preview p{
     margin: 0;
@@ -11,8 +12,7 @@
     white-space: nowrap;    /* מונע ירידת שורה */
     overflow: hidden;       /* מסתיר את התוכן שיוצא מהרוחב */
     text-overflow: ellipsis; /* מוסיף "..." כשאין מקום */
-    max-width: 100%;
-    
+    max-width: 100%;   
 }
 
 .mail-preview h3 ,.mail-preview h4{
@@ -21,4 +21,8 @@
     text-overflow: ellipsis; /* מוסיף "..." כשאין מקום */
     max-width: 100%;
     font-size: 0.875rem;
+}
+
+.mail-preview h3{
+    font-size: 1rem;
 }

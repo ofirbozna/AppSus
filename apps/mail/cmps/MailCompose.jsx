@@ -3,12 +3,11 @@ import { mailsService } from "../services/mail.service.js"
 
 const { useState, useEffect, useRef } = React
 
-export function MailCompose({ onSetIsCompose,draftToEdit }) {
+export function MailCompose({ onCloseMailEdit,onSetIsCompose, draftToEdit }) {
 
     const [mailToCompose, setMailToCompose] = useState(draftToEdit)
     const mailToComposeRef = useRef(mailToCompose);
     mailToComposeRef.current = mailToCompose;
-
     useEffect(() => {
         mailsService.save(mailToCompose)
             .then(setMailToCompose)
@@ -17,7 +16,10 @@ export function MailCompose({ onSetIsCompose,draftToEdit }) {
     useEffect(() => {
         if (mailToCompose.sentAt) {
             mailsService.save(mailToCompose)
-                .then(onSetIsCompose)
+                .then(onCloseMailEdit)
+                .catch((err) => {
+                    console.error("Error in saving mail:", err);
+                });
         }
     }, [mailToCompose]);
 

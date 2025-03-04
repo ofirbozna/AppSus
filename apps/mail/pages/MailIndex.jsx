@@ -6,7 +6,7 @@ import { MailFolderList } from "../cmps/MailFolderList.jsx"
 import { MailSort } from "../cmps/MailSort.jsx"
 
 const { useState, useEffect } = React
-const { useSearchParams } = ReactRouterDOM
+const { useSearchParams, Outlet } = ReactRouterDOM
 
 export function MailIndex() {
 
@@ -66,9 +66,14 @@ export function MailIndex() {
     }
 
     function onSetIsCompose(mail) {
+        if(mail.sentAt) return
         setDraftToEdit(mail)
-        setIsCompose(!isCompose)
+        setIsCompose(prevIsCompose=> !prevIsCompose)
         // loadMails()
+    }
+
+    function onCloseMailEdit(){
+        setIsCompose(prevIsCompose=> !prevIsCompose)
     }
 
 
@@ -97,7 +102,7 @@ export function MailIndex() {
     function onSetIsReadBtn(mailId) {
         setMails(prevMails => {
             return prevMails.map(mail =>
-                mail.id === mailId ? { ...mail, isRead: !mail.isRead} : mail
+                mail.id === mailId ? { ...mail, isRead: !mail.isRead } : mail
             )
         })
         mailsService.get(mailId)
@@ -111,15 +116,27 @@ export function MailIndex() {
     return <section className="mails-container">
         <MailFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
         <MailSort onSortBy={onSortBy} />
-        <MailList mails={mails} onRemove={removeMail}
+
+        <main>
+            <Outlet context={{
+                mails,
+                onRemove: removeMail,
+                filterBy,
+                onSetIsCompose,
+                isCompose,
+                onSetIsStared,
+                onSetIsReadBtn
+            }} />
+        </main>
+        {/* <MailList mails={mails} onRemove={removeMail}
             filterBy={filterBy} onSetIsCompose={onSetIsCompose}
             isCompose={isCompose} onSetIsStared={onSetIsStared}
-            onSetIsReadBtn={onSetIsReadBtn} />
+            onSetIsReadBtn={onSetIsReadBtn} /> */}
         <section className="side-bar flex column">
             <button className='compose-btn' onClick={() => onSetIsCompose(draftToEdit)}><i className="fa-solid fa-pencil"></i> <span>Compose</span></button>
             <MailFolderList filterBy={filterBy} onSetFilterBy={onSetFilterBy} mailsCount={mailsCount} />
         </section>
-        {isCompose && <MailCompose onSetIsCompose={onSetIsCompose} draftToEdit={draftToEdit} />}
+        {isCompose && <MailCompose onCloseMailEdit={onCloseMailEdit} onSetIsCompose={onSetIsCompose} draftToEdit={draftToEdit} />}
     </section>
 }
 

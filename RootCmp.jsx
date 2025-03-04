@@ -11,6 +11,7 @@ import { FilterPage } from './apps/note/cmps/FilterPage.jsx'
 import { NoteTrash } from './apps/note/cmps/NoteTrash.jsx'
 import { NoteArchive } from './apps/note/cmps/NoteArchive.jsx'
 import { MailDetails } from './apps/mail/pages/MailDetails.jsx'
+import { MailList } from './apps/mail/cmps/MailList.jsx'
 
 export function RootCmp() {
   return (
@@ -20,12 +21,14 @@ export function RootCmp() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/mail" element={<MailIndex />} />
+          <Route path="/mail" element={<MailIndex />}>
+            <Route index element={<MailList />} />
+            <Route path="/mail/:mailId" element={<MailDetails />} />
+          </Route>
           <Route path="/note" element={<NoteIndex />} />
           <Route path="/note/trash" element={<NoteTrash />} />
           <Route path="/note/archive" element={<NoteArchive />} />
           <Route path="/filter" element={<FilterPage />} />
-          <Route path="/mail/:mailId" element={<MailDetails />} />
         </Routes>
         <UserMsg />
       </section>
