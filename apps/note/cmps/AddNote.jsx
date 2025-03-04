@@ -1,6 +1,7 @@
 import { noteService } from '../services/note.service.js'
 import { ColorPicker } from './ColorPicker.jsx'
 const { useState, useRef, useEffect } = React
+const { useLocation, useSearchParams } = ReactRouterDOM
 
 export function AddNote({ onAddNote }) {
   const [title, setTitle] = useState('')
@@ -18,6 +19,27 @@ export function AddNote({ onAddNote }) {
   const noteRef = useRef(null)
   const fileInputRef = useRef(null)
   const colorPickerRef = useRef(null)
+
+  {
+    /*Create note from email */
+  }
+
+  const [searchParams] = useSearchParams()
+
+  useEffect(() => {
+    let subject = searchParams.get('subject') || ''
+    let body = searchParams.get('body') || ''
+
+    // fix spaces and special characters
+    subject = decodeURIComponent(subject)
+    body = decodeURIComponent(body)
+
+    if (subject || body) {
+      setTitle(subject)
+      setText(body)
+      setIsExpanded(true)
+    }
+  }, [searchParams])
 
   useEffect(() => {
     function handleClickOutside(event) {
