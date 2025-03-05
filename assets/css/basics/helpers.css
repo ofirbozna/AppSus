@@ -1,28 +1,86 @@
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .column {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .justify-center {
-    justify-content: center;
+  justify-content: center;
 }
 
 .align-center {
-    align-items: center;
+  align-items: center;
 }
 
 .space-between {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .grid {
-    display: grid;
+  display: grid;
 }
 .clean-list {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+/* flex helpers */
+
+.flex.flex-column {
+  flex-direction: column;
+}
+
+.flex.justify-center {
+  justify-content: center;
+}
+
+.flex.justify-between {
+  justify-content: space-between;
+}
+
+.flex.align-center {
+  align-items: center;
+}
+
+/* text helpers */
+
+.colored-text {
+  color: var(--clr1);
+}
+
+/* list helpers */
+
+.clean-list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+/* font awsome */
+
+.fa {
+  font-family: fa;
+}
+
+.fa.fa-facebook::before {
+  content: '\f39e';
+}
+
+.fa.fa-twitter::before {
+  content: '\f099';
+}
+
+.fa.fa-dribbble::before {
+  content: '\f17d';
+}
+
+.fa.fa-behance::before {
+  content: '\f1b4';
+}
+
+.book-theme {
+  background: var(--clr1bg);
+  color: var(--clr1txt);
 }

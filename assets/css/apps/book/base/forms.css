@@ -1,0 +1,19 @@
+.book-btn {
+  cursor: pointer;
+  color: var(--clr1txt);
+  background-color: var(--clr2bg);
+  margin: 0.5em;
+  border: 0;
+  padding: 0.5em 0.8em;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+.book-btn:hover {
+  background-color: var(--clr4bg);
+  transition: 0.3s;
+  transform: translateY(-5px);
+}
+input:focus {
+  background-color: var(--clr1bg);
+  transition: background-color 1s;
+}

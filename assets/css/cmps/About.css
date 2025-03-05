@@ -118,10 +118,10 @@
   .about-title {
     font-size: 26px;
   }
-  .about-app-books-logo {
-    width: 100px;
-    height: 45px;
-  }
+  /* .about-app-books-logo {
+      width: 100px;
+      height: 60px;
+    } */
   .app-boxes {
     flex-direction: row;
     flex-wrap: wrap;

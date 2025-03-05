@@ -1,0 +1,104 @@
+.book-list {
+  list-style: none;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  justify-content: center;
+}
+.list-header {
+  justify-self: center;
+}
+.book-list li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  background-color: var(--clr3bg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: transform 0.2s;
+  padding: 15px;
+  position: relative;
+}
+.book-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.reviews-header {
+  text-align: center;
+  font-size: 2rem;
+}
+.book-list li:hover {
+  transform: translateY(-10px);
+}
+.details-btn:hover {
+  background-color: #e8c500;
+}
+
+.remove-btn {
+  background-color: #ff6b6b;
+}
+
+.remove-btn:hover {
+  background-color: #e64e4e;
+}
+
+.edit-btn {
+  background-color: #7f8c8d;
+}
+
+.edit-btn:hover {
+  background-color: #666;
+}
+.ribbon {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px;
+  height: 75px;
+  text-align: right;
+}
+.ribbon span {
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 20px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  width: 100px;
+  display: block;
+  background: #79a70a;
+  background: linear-gradient(#f70505 0%, #8f0808 100%);
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 19px;
+  right: -21px;
+}
+.ribbon span::before {
+  content: '';
+  position: absolute;
+  left: 0px;
+  top: 100%;
+  z-index: -1;
+  border-left: 3px solid #8f0808;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #8f0808;
+}
+.ribbon span::after {
+  content: '';
+  position: absolute;
+  right: 0px;
+  top: 100%;
+  z-index: -1;
+  border-left: 3px solid transparent;
+  border-right: 3px solid #8f0808;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #8f0808;
+}

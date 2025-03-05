@@ -2,31 +2,31 @@ import { eventBusService } from '../services/event-bus.service.js'
 const { useState, useEffect, useRef } = React
 
 export function UserMsg() {
-
   const [msg, setMsg] = useState(null)
-  const timeoutIdRef = useRef()
 
   useEffect(() => {
-    const unsubscribe = eventBusService.on('show-user-msg', (msg) => {
+    const onRemoveListener = eventBusService.on('show-user-msg', (msg) => {
+      // console.log('msg:', msg)
       setMsg(msg)
-      if (timeoutIdRef.current) {
-        clearTimeout(timeoutIdRef.current)
-        timeoutIdRef.current = null
-      }
-      timeoutIdRef.current = setTimeout(closeMsg, 3000)
+      setTimeout(closeMsg, 3000)
     })
-    return unsubscribe
+
+    return () => {
+      onRemoveListener()
+    }
   }, [])
 
   function closeMsg() {
     setMsg(null)
   }
-  const className = (msg)? `${msg.type} open` : '' 
+
+  if (!msg) return null
   return (
-    <section className={`user-msg ${className}`}>
-      <button onClick={closeMsg}>x</button>
-      {msg && msg.txt}
+    <section className={`user-msg ${msg.type}`}>
+      <h4 className="msg-user">{msg.txt}</h4>
+      <button onClick={closeMsg} className="close-btn book-btn">
+        X
+      </button>
     </section>
   )
 }
-

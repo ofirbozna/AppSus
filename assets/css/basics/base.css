@@ -1,5 +1,5 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -26,4 +26,3 @@ img {
   width: 100%;
   object-fit: cover;
 }
-

@@ -31,3 +31,30 @@
 @import './apps/mail/MailFolderList.css';
 @import './apps/mail/MailSort.css';
 @import './apps/mail/MailFilter.css';
+
+/* books*/
+/* Setup */
+@import 'setup/media-queries.css';
+@import 'setup/vars.css';
+@import 'setup/typography.css';
+
+/* Base */
+@import 'base/base.css';
+@import 'base/helpers.css';
+@import 'apps/book/base/layout.css';
+@import 'apps/book/base/forms.css';
+
+/* Components */
+@import 'apps/book/cmps/myStyles.css';
+
+@import 'apps/book/cmps/user-msg.css';
+@import 'apps/book/cmps/book-list.css';
+@import 'apps/book/cmps/book-preview.css';
+@import 'apps/book/cmps/book-details.css';
+@import 'apps/book/cmps/book-edit.css';
+@import 'apps/book/cmps/book-filter.css';
+@import 'apps/book/cmps/book-index.css';
+@import 'apps/book/cmps/add-book-review.css';
+@import 'apps/book/cmps/book-reviews.css';
+@import 'apps/book/cmps/loader.css';
+@import 'apps/book/cmps/google-searched-books.css';

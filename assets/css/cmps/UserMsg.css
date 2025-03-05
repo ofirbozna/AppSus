@@ -1,25 +1,69 @@
 .user-msg {
-    position: fixed;
-    bottom: -100px;
-    right: .5em;
-    padding: .5em;
-    background-color: #111;
-}
-
-.user-msg.open {
-    bottom: .8em;
-    transition: bottom .5s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 1.5em;
+  right: 1.5em;
+  min-width: 100px;
+  /* max-width: 400px; */
+  background-color: #333;
+  color: white;
+  font-weight: bold;
+  padding: 0.5em;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.4s ease-out forwards;
 }
 
 .user-msg.success {
-    background-color: var(--color2);
+  background-color: #4caf50; /* Green for success */
 }
 
 .user-msg.error {
-    background-color: var(--color3);
+  background-color: #f44336; /* Red for errors */
 }
 
-.user-msg button{
-   float: right;
-   margin-inline-start: 4px;
+.user-msg button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.2s;
+}
+
+.user-msg button:hover {
+  transform: scale(1.2);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h4.user-msg {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+/* Responsive: Adjust position on small screens */
+@media (max-width: 600px) {
+  .user-msg {
+    bottom: 1em;
+    right: 50%;
+    transform: translateX(50%) translateY(20px);
+    width: 90%;
+  }
 }

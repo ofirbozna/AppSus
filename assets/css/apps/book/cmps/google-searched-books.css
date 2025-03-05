@@ -1,0 +1,106 @@
+/* Parent container */
+.book-search {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--clr1bg);
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-book-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.add-book-title label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.add-book-title form {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+}
+
+.add-book-title input {
+  margin: 0;
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #f3cf95;
+  border-radius: 5px;
+  height: 40px;
+  background-color: #f3cf95;
+}
+
+#add-book:focus {
+  background-color: #f3cf95;
+  border-color: var(--clr2txtActive);
+}
+.add-book-title button {
+  margin: 0;
+  padding: 10px;
+  font-size: 1rem;
+  background: #f3cf95;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-book-title button:hover {
+  background: var(--clr2txtActive);
+}
+
+.google-search-list {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+/*///////////////////////////////////////////////////////////////////////*/
+
+.google-search-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+
+.google-search-list li span {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.google-search-list button {
+  width: 25px;
+  height: 25px;
+  background: #f3cf95;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease-in-out;
+}
+
+.google-search-list button:hover {
+  background: var(--clr2txtActive);
+}

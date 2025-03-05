@@ -57,27 +57,29 @@ export function NotesSidebar() {
           <Link
             to="/note"
             className={`sidebar-item ${
-              location.pathname.startsWith('/note') ? 'active' : ''
+              location.pathname === '/note' ? 'active' : ''
             }`}
             onClick={() => setIsMenuOpen(false)}
           >
             <i className="fas fa-lightbulb"></i>
             <span className="sidebar-text">Notes</span>
           </Link>
+
           <Link
             to="/note/archive"
             className={`sidebar-item ${
-              location.pathname.startsWith('/note/archive') ? 'active' : ''
+              location.pathname === '/note/archive' ? 'active' : ''
             }`}
             onClick={() => setIsMenuOpen(false)}
           >
             <i className="fas fa-box"></i>
             <span className="sidebar-text">Archive</span>
           </Link>
+
           <Link
             to="/note/trash"
             className={`sidebar-item ${
-              location.pathname.startsWith('/note/trash') ? 'active' : ''
+              location.pathname === '/note/trash' ? 'active' : ''
             }`}
             onClick={() => setIsMenuOpen(false)}
           >

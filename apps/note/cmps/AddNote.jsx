@@ -1,5 +1,10 @@
 import { noteService } from '../services/note.service.js'
 import { ColorPicker } from './ColorPicker.jsx'
+import {
+  eventBusService,
+  showErrorMsg,
+  showSuccessMsg,
+} from '../../../services/event-bus.service.js'
 const { useState, useRef, useEffect } = React
 const { useLocation, useSearchParams } = ReactRouterDOM
 
@@ -324,12 +329,12 @@ export function AddNote({ onAddNote }) {
 
             <div className="note-add-expanded-footer">
               <div className="note-toolbar">
-                <button type="button" className="icon-button">
+                {/* <button type="button" className="icon-button">
                   <i className="fas fa-bell"></i>
-                </button>
-                <button type="button" className="icon-button">
+                </button> */}
+                {/* <button type="button" className="icon-button">
                   <i className="fas fa-user-plus"></i>
-                </button>
+                </button> */}
                 <div
                   className="icon-button color-btn "
                   onClick={(e) => e.stopPropagation()}
@@ -346,9 +351,9 @@ export function AddNote({ onAddNote }) {
                 >
                   <i className="fas fa-image"></i>
                 </button>
-                <button type="button" className="icon-button">
+                {/* <button type="button" className="icon-button">
                   <i className="fas fa-ellipsis-v"></i>
-                </button>
+                </button> */}
               </div>
 
               <button

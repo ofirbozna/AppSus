@@ -24,7 +24,7 @@ export function NoteFilter({ filterBy }) {
   }
 
   return (
-    <section className="filter-container">
+    <section className="note-filter-container">
       <div className="search-bar" onClick={navigateToFilterPage}>
         <input
           className="search-bar-input"

@@ -1,0 +1,19 @@
+.link-add-book {
+  display: block;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 8px 12px;
+  background-color: var(--clr3bg);
+  color: var(--clr1txt);
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+
+  border: 1px solid var(--clr1txt);
+  border-radius: 4px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.link-add-book:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,81 @@
+.filter-container {
+  max-width: 300px;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: var(--clr3bg);
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1.5px solid var(--clr1txt);
+  position: relative;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out;
+  max-height: 60px; /* Shrink the form on defualt*/
+}
+
+/* Expand the form when hovered */
+.filter-container:hover {
+  max-height: 250px;
+}
+
+.filter-container h2 {
+  text-align: center;
+  font-size: 1.2em;
+  color: var(--clr1txt);
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.filter-container form {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Show fields when hovered */
+.filter-container:hover form {
+  opacity: 1;
+  /* transform: translateY(0); */
+}
+
+.filter-container label {
+  font-weight: bold;
+  font-size: 0.9em;
+  color: var(--clr1txt);
+  margin-top: 5px;
+  display: block;
+}
+
+.filter-container input {
+  width: 100%;
+  padding: 5px;
+  border: 1.5px solid var(--clr1txt);
+  border-radius: 4px;
+  font-size: 0.9em;
+  background-color: var(--clr1bg);
+  color: var(--clr1txt);
+  transition: border 0.2s ease-in-out;
+}
+
+.filter-container input:focus {
+  border-color: var(--clrsuccess);
+  outline: none;
+}
+
+.filter-container button {
+  width: 100%;
+  padding: 6px;
+  background-color: var(--clrsuccess);
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  margin: 0;
+  margin-top: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.filter-container button:hover {
+  cursor: pointer;
+  background-color: var(--clr1txtActive);
+}

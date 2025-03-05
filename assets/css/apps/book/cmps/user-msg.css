@@ -1,0 +1,27 @@
+/* .user-msg {
+  display: flex;
+  margin-bottom: 10px;
+  margin-right: 0;
+  background-color: lightgray;
+  padding: 0.5em;
+  position: fixed;
+  bottom: 0;
+  right: 0.5em;
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+.user-msg.success {
+  background-color: var(--clrsuccess);
+}
+
+.user-msg.error {
+  background-color: var(--clrerr);
+}
+
+.user-msg button {
+  float: right;
+  margin: 1em;
+  font-size: 0.5em;
+} */

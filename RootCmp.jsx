@@ -1,5 +1,6 @@
-const { Route, Routes } = ReactRouterDOM
+const { Route, Routes, useLocation } = ReactRouterDOM
 const Router = ReactRouterDOM.HashRouter
+const { useEffect } = React
 
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { UserMsg } from './cmps/UserMsg.jsx'
@@ -12,6 +13,9 @@ import { NoteTrash } from './apps/note/cmps/NoteTrash.jsx'
 import { NoteArchive } from './apps/note/cmps/NoteArchive.jsx'
 import { MailDetails } from './apps/mail/pages/MailDetails.jsx'
 import { MailList } from './apps/mail/cmps/MailList.jsx'
+import { BookIndex } from './apps/book/pages/BookIndex.jsx'
+import { BookDetails } from './apps/book/pages/BookDetails.jsx'
+import { BookEdit } from './apps/book/pages/BookEdit.jsx'
 
 export function RootCmp() {
   return (
@@ -29,6 +33,10 @@ export function RootCmp() {
           <Route path="/note/trash" element={<NoteTrash />} />
           <Route path="/note/archive" element={<NoteArchive />} />
           <Route path="/note/filter" element={<FilterPage />} />
+          <Route path="/book" element={<BookIndex />} />
+          <Route path="/book/:bookId" element={<BookDetails />} />
+          <Route path="/book/edit" element={<BookEdit />} />
+          <Route path="/book/edit/:bookId" element={<BookEdit />} />
         </Routes>
         <UserMsg />
       </section>

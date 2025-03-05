@@ -1,19 +1,4 @@
 :root {
-  --bg1: lightblue;
-  --bg2: rgb(50, 160, 204);
-  --bg3: rgb(89, 134, 206);
-
-  --color1: rgb(26, 115, 232);
-  --color2: rgb(24, 128, 56);
-  --color3: rgb(197, 34, 31);
-
-  --gray1: #aaa;
-  --gray2: #888;
-  --gray3: #333;
-  --gray4: #222;
-
-  --mailBlue1: #f2f6fc;
-
   --clr1bg: #fff8e8;
   --clr1txt: #674636;
   --clr1txtBg: #aa836f98;
@@ -28,4 +13,8 @@
   --clrlprice: #6fc276;
   --clrsuccess: #008000aa;
   --clrerr: #ec634bb1;
+
+  --gray1: rgb(240, 240, 240);
+  --gray2: rgb(155, 155, 155);
+  --gray3: rgb(44, 44, 44);
 }

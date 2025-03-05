@@ -7,6 +7,16 @@ export function AppHeader() {
   const menuRef = useRef(null)
   const buttonRef = useRef(null)
 
+  //update the color for all book app
+  useEffect(() => {
+    // check if the URL contains "book" and and style
+    if (location.pathname.includes('book')) {
+      document.body.classList.add('book-theme')
+    } else {
+      document.body.classList.remove('book-theme')
+    }
+  }, [location.pathname])
+
   // Handle clicks outside of the menu to close it
   useEffect(() => {
     function handleClickOutside(event) {

@@ -1,0 +1,153 @@
+.book-details {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: var(--clr1bg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: var(--clr1txt);
+  font-family: 'Arial', sans-serif;
+  position: relative;
+}
+
+.title-detail {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--clr1txt);
+  margin-bottom: 5px;
+}
+
+.subtitle-detail {
+  font-size: 18px;
+  color: #7a5646;
+  margin-bottom: 15px;
+}
+
+.thumbnail-detail {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.thumbnail-detail img {
+  max-width: 180px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Book Info */
+.book-info {
+  text-align: left;
+  margin-top: 15px;
+  background: var(--clr3bg);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.book-info p {
+  font-size: 16px;
+  margin: 8px 0;
+  font-weight: 500;
+}
+
+.book-info p strong {
+  font-weight: bold;
+  color: var(--clr1txt);
+}
+
+.price-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--clr1txt);
+  position: relative;
+}
+
+.sale-tag {
+  background: red;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 5px;
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.book-details-info-text {
+  background-color: var(--clr2bg);
+}
+.book-details-info-title {
+  font-weight: bold;
+}
+.high-price {
+  color: var(--clrhprice);
+}
+.low-price {
+  color: var(--clrlprice) !important;
+}
+
+.original-price--detail {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 18px;
+  position: relative;
+  display: inline-block;
+}
+
+.discount-label-detail {
+  position: absolute;
+
+  background: red;
+  color: white;
+  padding: 4px 6px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  transform: translate(50%, -50%);
+}
+
+.discounted-price-detail {
+  font-size: 22px;
+  font-weight: bold;
+
+  margin-top: 5px;
+}
+.book-details-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.book-details-nav a {
+  text-decoration: none;
+}
+
+.book-details-nav button {
+  background-color: #f7de97;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+
+.book-details-nav button:hover {
+  background-color: #f7d65f;
+}
+
+.book-details-nav a:first-child {
+  margin-right: auto;
+}
+
+.book-details-nav a:last-child {
+  margin-left: auto; /* Pushes next button to the right */
+}

@@ -1,0 +1,16 @@
+@media (max-width: 768px) {
+  .book-details {
+    width: 90%;
+    padding: 15px;
+  }
+  .thumbnail-detail img {
+    max-width: 100px !important;
+  }
+  .filter-container {
+    max-width: 90%;
+  }
+  .edit-container {
+    max-width: 90%;
+    padding: 15px;
+  }
+}
