@@ -20,7 +20,7 @@ export function NoteFilter({ filterBy }) {
     Object.entries(filterByToEdit).forEach(([key, value]) => {
       if (value) params.set(key, value)
     })
-    navigate(`/filter?${params.toString()}`)
+    navigate(`/note/filter?${params.toString()}`)
   }
 
   return (
