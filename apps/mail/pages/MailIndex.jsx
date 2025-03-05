@@ -17,6 +17,25 @@ export function MailIndex() {
     const [mailsCount, setMailsCount] = useState(0)
     const [draftToEdit, setDraftToEdit] = useState(mailsService.getEmptyMail())
 
+    useEffect(() => {
+        let subject = searchParams.get('subject')
+        let body = searchParams.get('body')
+        if (!subject || !body) return
+        subject = decodeURIComponent(subject)
+        body = decodeURIComponent(body)
+        onSetIsCompose({
+            createdAt: Date.now(),
+            subject,
+            body,
+            isRead: true,
+            isStarred: false,
+            sentAt: null,
+            removedAt: null,
+            from: 'ofirNevo@appsus.com',
+            to:''
+        })
+    }, [])
+
 
     useEffect(() => {
         setSearchParams(filterBy)
@@ -66,14 +85,14 @@ export function MailIndex() {
     }
 
     function onSetIsCompose(mail) {
-        if(mail.sentAt) return
+        if (mail.sentAt) return
         setDraftToEdit(mail)
-        setIsCompose(prevIsCompose=> !prevIsCompose)
+        setIsCompose(prevIsCompose => !prevIsCompose)
         // loadMails()
     }
 
-    function onCloseMailEdit(){
-        setIsCompose(prevIsCompose=> !prevIsCompose)
+    function onCloseMailEdit() {
+        setIsCompose(prevIsCompose => !prevIsCompose)
     }
 
 
@@ -128,10 +147,7 @@ export function MailIndex() {
                 onSetIsReadBtn
             }} />
         </main>
-        {/* <MailList mails={mails} onRemove={removeMail}
-            filterBy={filterBy} onSetIsCompose={onSetIsCompose}
-            isCompose={isCompose} onSetIsStared={onSetIsStared}
-            onSetIsReadBtn={onSetIsReadBtn} /> */}
+
         <section className="side-bar flex column">
             <button className='compose-btn' onClick={() => onSetIsCompose(draftToEdit)}><i className="fa-solid fa-pencil"></i> <span>Compose</span></button>
             <MailFolderList filterBy={filterBy} onSetFilterBy={onSetFilterBy} mailsCount={mailsCount} />

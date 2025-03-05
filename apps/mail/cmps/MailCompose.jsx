@@ -2,16 +2,20 @@ import { mailsService } from "../services/mail.service.js"
 
 
 const { useState, useEffect, useRef } = React
+const { useSearchParams } = ReactRouterDOM
 
-export function MailCompose({ onCloseMailEdit,onSetIsCompose, draftToEdit }) {
+export function MailCompose({ onCloseMailEdit, onSetIsCompose, draftToEdit }) {
 
+    const [searchParams] = useSearchParams()
     const [mailToCompose, setMailToCompose] = useState(draftToEdit)
     const mailToComposeRef = useRef(mailToCompose);
     mailToComposeRef.current = mailToCompose;
+
     useEffect(() => {
         mailsService.save(mailToCompose)
             .then(setMailToCompose)
     }, [])
+
 
     useEffect(() => {
         if (mailToCompose.sentAt) {
@@ -24,9 +28,9 @@ export function MailCompose({ onCloseMailEdit,onSetIsCompose, draftToEdit }) {
     }, [mailToCompose]);
 
     useEffect(() => {
-           const intervalId= setInterval(() => {
-               mailsService.save(mailToComposeRef.current)
-           }, 5000); 
+        const intervalId = setInterval(() => {
+            mailsService.save(mailToComposeRef.current)
+        }, 5000);
 
         return () => {
             clearInterval(intervalId)
@@ -50,11 +54,11 @@ export function MailCompose({ onCloseMailEdit,onSetIsCompose, draftToEdit }) {
             <h1>New Message<button onClick={onSetIsCompose} className="fa-solid fa-x "></button></h1>
             <form onSubmit={onSubmitMail}>
                 <label htmlFor="to">To</label>
-                <input className="mail-address" onChange={onHandleChange} value={to} type="email" name='to' />
+                <input className="mail-address" onChange={onHandleChange} value={to||''} type="email" name='to' />
 
-                <input onChange={onHandleChange} value={subject} type="text" placeholder="Subject" name='subject' />
+                <input onChange={onHandleChange} value={subject||''} type="text" placeholder="Subject" name='subject' />
 
-                <textarea name="body" onChange={onHandleChange} value={body} id="body"></textarea>
+                <textarea name="body" onChange={onHandleChange} value={body|| ''} id="body"></textarea>
                 <button>Send</button>
             </form>
         </section>
