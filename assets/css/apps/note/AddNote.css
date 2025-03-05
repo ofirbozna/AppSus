@@ -138,13 +138,13 @@
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-/* Specific styling for image preview in the AddNote component*/
+
 
 .add-note .image-preview {
   margin: 10px 0;
   border-radius: 4px;
   overflow: hidden;
-  max-height: 200px; /* Control the height of the preview image */
+  max-height: 200px;/
 }
 
 .add-note .image-preview img {
@@ -154,11 +154,11 @@
 
 /* When the form is expanded */
 .add-note.expanded {
+  min-width: 250px;
   max-height: 400px;
   padding: 12px;
 }
 
-/* Making sure the expanded form with image has good spacing */
 /* .add-note.expanded .image-content {
   display: flex;
   flex-direction: column;
