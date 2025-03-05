@@ -8,6 +8,7 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
     const [isSideBarOpen,setIsSideBarOpen] = useState(false)
 
     useEffect(() => {
+        console.log(filterByToEdit)
         onSetFilterBy(filterByToEdit)
     }, [filterByToEdit])
 
@@ -23,8 +24,7 @@ export function MailFilter({ filterBy, onSetFilterBy }) {
 
     function onToggleSideBar(ev){
         ev.preventDefault()
-        console.log('tired')
-        setIsSideBarOpen(prevState => !prevState)
+           setIsSideBarOpen(prevState => !prevState)
     }
 
     return (

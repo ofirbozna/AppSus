@@ -20,11 +20,20 @@ export function MailIndex() {
     useEffect(() => {
         let subject = searchParams.get('subject')
         let body = searchParams.get('body')
-        console.log(subject)
-        if (!subject|| !body) return
+        if (!subject || !body) return
         subject = decodeURIComponent(subject)
         body = decodeURIComponent(body)
-        onSetIsCompose({subject,body})
+        onSetIsCompose({
+            createdAt: Date.now(),
+            subject,
+            body,
+            isRead: true,
+            isStarred: false,
+            sentAt: null,
+            removedAt: null,
+            from: 'ofirNevo@appsus.com',
+            to:''
+        })
     }, [])
 
 
