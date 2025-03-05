@@ -1,7 +1,7 @@
 const { useNavigate, useSearchParams } = ReactRouterDOM
 const { useEffect } = React
 
-export function NoteToMail({ note }) {
+export function NoteToEmail({ note }) {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams({})
 

@@ -1,5 +1,5 @@
 import { ColorPicker } from './ColorPicker.jsx'
-import { NoteToMail } from './NoteToEmail.jsx'
+import { NoteToEmail } from './NoteToEmail.jsx'
 
 export function NoteActions({
   note,
@@ -58,7 +58,7 @@ export function NoteActions({
         <i className="fas fa-copy"></i>
       </button>
       <div onClick={(e) => e.stopPropagation()}>
-        <NoteToMail note={note} />
+        <NoteToEmail note={note} />
       </div>
     </div>
   )
