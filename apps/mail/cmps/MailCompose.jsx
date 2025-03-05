@@ -2,9 +2,11 @@ import { mailsService } from "../services/mail.service.js"
 
 
 const { useState, useEffect, useRef } = React
+const { useSearchParams } = ReactRouterDOM
 
-export function MailCompose({ onCloseMailEdit,onSetIsCompose, draftToEdit }) {
+export function MailCompose({ onCloseMailEdit, onSetIsCompose, draftToEdit }) {
 
+    const [searchParams] = useSearchParams()
     const [mailToCompose, setMailToCompose] = useState(draftToEdit)
     const mailToComposeRef = useRef(mailToCompose);
     mailToComposeRef.current = mailToCompose;
@@ -12,6 +14,7 @@ export function MailCompose({ onCloseMailEdit,onSetIsCompose, draftToEdit }) {
         mailsService.save(mailToCompose)
             .then(setMailToCompose)
     }, [])
+
 
     useEffect(() => {
         if (mailToCompose.sentAt) {
@@ -24,9 +27,9 @@ export function MailCompose({ onCloseMailEdit,onSetIsCompose, draftToEdit }) {
     }, [mailToCompose]);
 
     useEffect(() => {
-           const intervalId= setInterval(() => {
-               mailsService.save(mailToComposeRef.current)
-           }, 5000); 
+        const intervalId = setInterval(() => {
+            mailsService.save(mailToComposeRef.current)
+        }, 5000);
 
         return () => {
             clearInterval(intervalId)
