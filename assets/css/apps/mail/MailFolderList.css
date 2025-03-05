@@ -4,18 +4,14 @@
 }
 
 .folder-list li {
-    /* display: flex; */
-    /* justify-content: center; */
     height: 2rem;
     cursor: pointer;
     transition: all 200ms ease;
-
 }
 
 .selected {
     background-color: #d3e3fd;
     font-weight: bold;
-    padding-inline: 10px;
   }
 
 .folder-list li:not(.selected):hover {
@@ -31,4 +27,5 @@
 
 .folder-list li span:nth-of-type(2) {
     font-weight: bold;
+    justify-self: center;
 }

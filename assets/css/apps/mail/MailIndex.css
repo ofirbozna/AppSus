@@ -4,18 +4,25 @@ main {
 }
 
 .mail-filter.open~.side-bar {
-  background-color: white;
+  background-color:rgb(255, 255, 255);
   position: fixed;
-  top: 70px;
+  top:0;
   left: 0;
   height: 100vh;
-  width: 50vw;
-  z-index: 100;
-
+  width: 60vw;
+  z-index: 1000;
+  opacity: 1;
+  pointer-events: auto;
   align-items: start;
   margin-inline-end: 1rem;
   gap: 1rem;
   transition: all 400ms ease-in-out;
+  padding-block-start: 2rem;
+}
+
+.mail-filter.open~.mails-container {
+  overflow: hidden;
+  height: 100vh;
 }
 
 @media (min-width: 750px) {
@@ -116,6 +123,7 @@ main {
   .selected {
     border-radius: 50%;
     margin-inline-start: 1rem;
+    padding-inline: 10px;
   }
 
   .side-bar:hover li {
@@ -132,9 +140,13 @@ main {
 
   }
 
+  .folder-list li {
+    display: flex;
+  }
+
   .folder-list li:not(.selected) {
     align-items: center;
-    margin-inline-start: 1.625rem;
+    padding-inline-start: 1.625rem;
   }
 
   .screen {
@@ -149,15 +161,22 @@ main {
 @media (max-width: 750px) {
   .mail-line {
     display: grid;
+    grid-template-columns: minmax(auto, 75vw) auto;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
       "mail-preview mail-date"
       "mail-preview mail-star";
-    padding-inline-start: 2rem;
+    /* הוספנו את mail-preview גם כאן */
+    padding-inline-start: 1rem;
+  }
+
+  .mail-line a {
+    display: grid;
+    grid-area: mail-preview;
   }
 
   .mail-preview {
-    grid-area: mail-preview;
+    grid-row: 1 / 3;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -194,21 +213,26 @@ main {
 
   .star {
     grid-area: mail-star;
-    align-self: center;
   }
+
 
   .side-bar li {
     display: grid;
-    grid-template-columns: 40px auto 1fr;
+    grid-template-columns: 50px auto 1fr;
     align-items: center;
     min-width: 150px;
-    padding-inline: 1.625rem;
+    padding-inline: 1rem;
     margin-inline-start: 0
   }
 
   .side-bar .selected {
     border-radius: 0 20px 20px 0px;
     ;
+  }
+
+  .side-bar {
+    opacity: 0;
+    pointer-events: none;
   }
 
 
