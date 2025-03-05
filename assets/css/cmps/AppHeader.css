@@ -1,14 +1,36 @@
 .app-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1em;
-  /* background: var(--bg1); */
   border-bottom: 1px solid rgba(0, 0, 0, 0);
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.291);
+  background: white;
+  position: relative;
+  z-index: 1000;
+}
+
+.app-logo {
+  width: 100px;
+  object-fit: fill;
+}
+
+.app-logo.logo-size {
+  width: 95px;
+  height: 5.5vh;
+}
+
+.header-nav {
+  display: flex;
+  gap: 1em;
 }
 
 .header-nav a {
   margin: 0.5em;
+  text-decoration: none;
+  color: black;
+  font-size: 1em;
+  transition: color 0.3s ease;
 }
 
 .header-nav a.active {
@@ -16,13 +38,66 @@
   font-weight: bold;
   text-decoration: overline;
 }
-.app-logo {
-  width: 100px;
-  object-fit: fill;
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8em;
+  cursor: pointer;
+  padding: 0.2em 0.5em;
+  transition: transform 0.3s ease;
 }
-.app-logo.logo-size {
-  width: 95px;
-  height: 5.5vh;
+
+.nav-menu-container {
+  position: relative;
+}
+
+.nav-menu {
+  position: fixed;
+
+  top: 0;
+  right: 0;
+  height: 100vh;
+  border-inline-start: 1px solid #ccc;
+  background-color: rgb(255 255 255 / 90%);
+  min-width: 200px;
+  transition: transform 0.6s;
+}
+
+.nav-menu.open {
+  right: 0;
+}
+.nav-menu-text {
+  margin-left: 20px;
+}
+
+.nav-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 12px 15px;
+  color: #202124;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+  /* border-radius: 25px 0 0 25px; */
+  width: 100%;
+  font-size: 1rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ccc;
+}
+
+.nav-menu-item:hover {
+  background: linear-gradient(to left, #feefc3 0%, #feefc3 100%);
+  color: #202124;
+}
+
+.nav-menu-item.active {
+  background: linear-gradient(to left, #feefc3 0%, #feefc3 100%);
+  color: #202124;
+  position: relative;
+  border: none;
 }
 @media (min-width: 601px) and (max-width: 830px) {
   .app-logo {
@@ -33,5 +108,30 @@
 @media (min-width: 831px) {
   .app-logo {
     width: 120px;
+  }
+}
+
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .header-nav {
+    display: none;
+  }
+
+  .nav-menu {
+    width: 17vw;
+    right: -60vw;
+  }
+
+  .nav-menu.open {
+    right: 0;
+  }
+}
+
+@media (min-width: 901px) {
+  .nav-menu-container {
+    display: none;
   }
 }
