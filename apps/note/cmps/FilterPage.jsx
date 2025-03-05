@@ -51,7 +51,10 @@ export function FilterPage() {
   return (
     <section className="filter-page">
       <div className="filter-header">
-        <button onClick={() => navigate('/note')} className="back-btn">
+        <button
+          onClick={() => navigate('/note')}
+          className="note-filter-back-btn"
+        >
           Back
         </button>
         <h2>Filter Notes</h2>

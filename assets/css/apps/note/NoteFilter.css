@@ -149,6 +149,14 @@
   border: 1px solid #ccc;
   color: #666;
 }
+.note-filter-back-btn {
+  color: #0c47ea;
+  border: none;
+  background: transparent;
+}
+.note-filter-back-btn:hover {
+  cursor: pointer;
+}
 
 .apply-btn {
   background-color: #4c74e3;
