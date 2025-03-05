@@ -9,31 +9,31 @@
     border-radius: 24px;
     min-height: 48px;
     max-width: 720px;
-    padding-inline-start: 2.5rem;
+    padding-inline-start: 3rem;
     margin-block-end: 1rem;
-}
+  }
 
 .mail-filter input:focus-visible {
     background-color: white;
     outline: none;
-    -webkit-box-shadow: 4px 3px 8px 0px rgba(189,189,189,1);
-    -moz-box-shadow: 4px 3px 8px 0px rgba(189,189,189,1);
-    box-shadow: 4px 3px 8px 0px rgba(189,189,189,1);
+    -webkit-box-shadow: 4px 3px 8px 0px rgba(189, 189, 189, 1);
+    -moz-box-shadow: 4px 3px 8px 0px rgba(189, 189, 189, 1);
+    box-shadow: 4px 3px 8px 0px rgba(189, 189, 189, 1);
 }
 
-.filter-by-read {
-    grid-area: mail-sort;
-    justify-self: start;
-    margin-inline-start: 5rem;
-    z-index: 1;
-    align-self: center;
-    border-radius: 10px;
-    padding: 0.1rem;
-    border-color: var(--gray1);
-}
-
-.fa-magnifying-glass {
+.fa-bars{
     position: absolute;
-    top: 0.9rem;
-    left: 1rem
+    top:49px;
+    left:20px;
 }
+
+.mail-filter.open~.screen{
+    position: fixed;
+    top: 70px;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(77, 76, 76, 0.524);
+}
+
+

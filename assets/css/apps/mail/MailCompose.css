@@ -9,9 +9,6 @@
     cursor: pointer;
     margin-inline-start: 0.5rem;
 }
-.compose-btn span{
-    display: none;
-}
 
 .mail-compose {
     position: fixed;

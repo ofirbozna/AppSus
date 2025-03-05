@@ -128,10 +128,7 @@ export function MailIndex() {
                 onSetIsReadBtn
             }} />
         </main>
-        {/* <MailList mails={mails} onRemove={removeMail}
-            filterBy={filterBy} onSetIsCompose={onSetIsCompose}
-            isCompose={isCompose} onSetIsStared={onSetIsStared}
-            onSetIsReadBtn={onSetIsReadBtn} /> */}
+    
         <section className="side-bar flex column">
             <button className='compose-btn' onClick={() => onSetIsCompose(draftToEdit)}><i className="fa-solid fa-pencil"></i> <span>Compose</span></button>
             <MailFolderList filterBy={filterBy} onSetFilterBy={onSetFilterBy} mailsCount={mailsCount} />

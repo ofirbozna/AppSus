@@ -1,34 +1,27 @@
-
-main{
+main {
   background-color: white;
   height: 100%;
 }
-.side-bar {
-  grid-area: side-bar;
+
+.mail-filter.open~.side-bar {
+  background-color: white;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  height: 100vh;
+  width: 50vw;
+  z-index: 100;
+
   align-items: start;
   margin-inline-end: 1rem;
   gap: 1rem;
   transition: all 400ms ease-in-out;
 }
 
-.side-bar span {
-  display: none;
-  transition: all 1s ease-in-out;
-}
-
-.side-bar:hover.side-bar span {
-  display: inline;
-}
-
-.side-bar:hover {
-  min-width: 248px;
-  align-items: start;
-}
-
-@media (min-width: 750px){
+@media (min-width: 750px) {
   .mails-container {
     display: grid;
-  
+
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto 1fr;
     grid-template-areas:
@@ -40,32 +33,183 @@ main{
     height: 90vh;
     padding-block-start: 2rem;
   }
-  
-  .mail-line{
+
+  .mail-line {
     display: grid;
-    grid-template-columns: auto minmax(auto,1000px) 1fr;
+    gap: 2rem;
+    grid-template-columns: auto minmax(auto, 1000px) 1fr;
     align-items: center;
+    padding-inline: 0.5rem;
   }
 
-  .mail-preview{
+  .mail-preview {
     display: grid;
     grid-template-columns: 200px max-content 1fr;
     gap: 0.3rem;
     padding-block: 0.625rem;
-}
-}
 
-@media (max-width: 750px){
-  .mail-line{
-    display: flex;
   }
 
-  .mail-preview{
+
+  .fa-magnifying-glass {
+    display: inline;
+    position: absolute;
+    top: 0.9rem;
+    left: 1rem
+  }
+
+  .mails-list {
+    grid-area: mail-list;
+    background-color: white;
+  }
+
+  .side-bar {
+    grid-area: side-bar;
+    align-items: start;
+    margin-inline-end: 1rem;
+    gap: 1rem;
+    transition: all 400ms ease-in-out;
+  }
+
+  .filter-by-read {
+    grid-area: mail-sort;
+    justify-self: start;
+    margin-inline-start: 5rem;
+    z-index: 1;
+    align-self: center;
+    border-radius: 10px;
+    padding: 0.1rem;
+    border-color: var(--gray1);
+  }
+
+  .mail-sort {
+    grid-area: mail-sort;
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 15px 15px 0 0;
+  }
+
+  .mail-sort select {
+    border-radius: 10px;
+    padding: 0.1rem;
+    border-color: var(--gray1);
+  }
+
+  .fa-bars {
+    opacity: 0;
+  }
+
+  .side-bar span {
+    display: none;
+    transition: all 1s ease-in-out;
+  }
+
+  .side-bar:hover.side-bar span {
+    display: inline;
+  }
+
+  .side-bar:hover {
+    min-width: 248px;
+    align-items: start;
+  }
+
+  .selected {
+    border-radius: 50%;
+    margin-inline-start: 1rem;
+  }
+
+  .side-bar:hover li {
+    display: grid;
+    grid-template-columns: 40px auto 1fr;
+    align-items: center;
+    min-width: 220px;
+    margin-inline-start: 0
+  }
+
+  .side-bar:hover .selected {
+    border-radius: 0 20px 20px 0px;
+    padding-inline: 1.625rem;
+
+  }
+
+  .folder-list li:not(.selected) {
+    align-items: center;
+    margin-inline-start: 1.625rem;
+  }
+
+  .screen {
+    display: none;
+  }
+
+  .compose-btn span {
+    display: none;
+  }
+}
+
+@media (max-width: 750px) {
+  .mail-line {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "mail-preview mail-date"
+      "mail-preview mail-star";
+    padding-inline-start: 2rem;
+  }
+
+  .mail-preview {
+    grid-area: mail-preview;
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap; /* מונע ירידת שורות */
+    flex-wrap: nowrap;
     width: 100%;
     overflow: hidden;
     padding-block: 0.625rem;
-}
+    line-height: 130%;
+  }
+
+
+  .fa-magnifying-glass {
+    opacity: 0;
+    height: 0;
+  }
+
+  .mail-filter input {
+    margin-block-start: 2rem;
+
+  }
+
+  .mail-sort {
+    display: none;
+  }
+
+  .filter-by-read {
+    display: none;
+  }
+
+  .mail-date,
+  .mail-btns {
+    grid-area: mail-date;
+    align-self: center;
+  }
+
+  .star {
+    grid-area: mail-star;
+    align-self: center;
+  }
+
+  .side-bar li {
+    display: grid;
+    grid-template-columns: 40px auto 1fr;
+    align-items: center;
+    min-width: 150px;
+    padding-inline: 1.625rem;
+    margin-inline-start: 0
+  }
+
+  .side-bar .selected {
+    border-radius: 0 20px 20px 0px;
+    ;
+  }
+
+
 }

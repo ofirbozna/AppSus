@@ -1,5 +1,4 @@
 .mails-list {
-    grid-area: mail-list;
     background-color: white;
 }
 
@@ -9,12 +8,9 @@
 }
 
 .mail-line {
-    gap: 2rem;
     border-block-end: 0.5px solid rgb(186, 186, 186);
     background-color: white;
     font-size: 0.875rem;
-    padding-inline: 0.5rem;
-
 }
 
 .mail-btns {
