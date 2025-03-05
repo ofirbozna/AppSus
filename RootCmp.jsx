@@ -28,7 +28,7 @@ export function RootCmp() {
           <Route path="/note" element={<NoteIndex />} />
           <Route path="/note/trash" element={<NoteTrash />} />
           <Route path="/note/archive" element={<NoteArchive />} />
-          <Route path="/filter" element={<FilterPage />} />
+          <Route path="/note/filter" element={<FilterPage />} />
         </Routes>
         <UserMsg />
       </section>
