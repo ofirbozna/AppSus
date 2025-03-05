@@ -69,7 +69,10 @@ export function AddNote({ onAddNote }) {
   }, [])
 
   function handleSubmit(ev) {
-    if (ev) ev.preventDefault()
+    if (ev) {
+      ev.preventDefault()
+      ev.stopPropagation()
+    }
 
     // Validate based on note type
     if (noteType === 'note-txt' && !text.trim()) return
@@ -359,7 +362,10 @@ export function AddNote({ onAddNote }) {
               <button
                 type="button"
                 className="close-btn"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+
                   const hasContent =
                     (noteType === 'note-txt' && text.trim()) ||
                     (noteType === 'note-img' && imageUrl) ||
