@@ -176,6 +176,10 @@ export function AddNote({ onAddNote }) {
     setIsExpanded(true)
   }
 
+  {
+    /*  ////////////////////////////////////////////////////////////////////////////////// */
+  }
+
   function RenderNoteAddContent() {
     if (noteType === 'note-txt') {
       return (
@@ -251,6 +255,9 @@ export function AddNote({ onAddNote }) {
     }
   }
 
+  {
+    /*  ////////////////////////////////////////////////////////////////////////////////// */
+  }
   return (
     <section
       ref={noteRef}
@@ -299,9 +306,9 @@ export function AddNote({ onAddNote }) {
               </button>
 
               {/*Draw will add later */}
-              <button type="button" className="icon-button">
+              {/* <button type="button" className="icon-button">
                 <i className="fa-solid fa-pencil"></i>
-              </button>
+              </button> */}
             </div>
           </div>
         ) : (

@@ -21,7 +21,7 @@
 
 .note-actions {
   display: flex;
-  gap: 8px;
+  gap: 4px;
   align-items: center;
 }
 
@@ -61,4 +61,6 @@
 .color-picker-container button:focus .color-picker,
 .color-picker-container button:hover .color-picker {
   display: block;
+}
+@media (min-width: 601px) and (max-width: 830px) {
 }
