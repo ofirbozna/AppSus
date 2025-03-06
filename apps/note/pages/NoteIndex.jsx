@@ -140,6 +140,18 @@ export function NoteIndex() {
     setNotes((prevNotes) => [duplicatedNote, ...prevNotes])
     showSuccessMsg('Note Duplicated Successfully')
   }
+  if (!notes)
+    return (
+      <div className="note-loader">
+        <div className="note-loader-container">
+          <div className="note-loader-ring"></div>
+          <div className="note-loader-ring"></div>
+          <div className="note-loader-ring"></div>
+          <div className="note-loader-ring"></div>
+          <div className="note-loader-h3">loading</div>
+        </div>
+      </div>
+    )
 
   return (
     <NoteLayout>
