@@ -9,6 +9,7 @@ export function NoteActions({
   onChangeColor,
   onDuplicateNote,
   showEdit,
+  showSendToMail,
 }) {
   return (
     <div className="note-actions">
@@ -57,9 +58,11 @@ export function NoteActions({
       >
         <i className="fas fa-copy"></i>
       </button>
-      <div onClick={(e) => e.stopPropagation()}>
-        <NoteToEmail note={note} />
-      </div>
+      {showSendToMail && (
+        <div onClick={(e) => e.stopPropagation()}>
+          <NoteToEmail note={note} />
+        </div>
+      )}
     </div>
   )
 }

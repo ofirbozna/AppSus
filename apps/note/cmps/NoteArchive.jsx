@@ -26,7 +26,7 @@ export function NoteArchive() {
         {notes.length === 0 ? (
           <div className="empty-archive-container">
             <img
-              src="/assets/imgs/archive-icon.png"
+              src="./assets/imgs/archive-icon.png"
               alt="Archive Icon"
               className="empty-archive-icon"
             />

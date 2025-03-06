@@ -73,6 +73,7 @@ export function NotePreview({
           onMoveToArchive={onMoveToArchive}
           onDuplicateNote={onDuplicateNote}
           showEdit={note.type === 'note-txt' || note.type === 'note-todos'}
+          showSendToMail={note.type === 'note-txt'}
         />
       </div>
     </article>
