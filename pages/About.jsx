@@ -63,12 +63,14 @@ export function About() {
 
         <div className="profile">
           <img
-            src="./assets/imgs/ofir-pic.png"
+            src="./assets/imgs/ofir-pic.jpg"
             alt="Placeholder"
             className="profile-pic circular"
           />
-          <h2 className="profile-name">Ofir Bozna</h2>
-          <p className="profile-description">ofir about</p>
+          <h2 className="profile-name">Ofir Bozna Nidam</h2>
+          <p className="profile-description">I'm a 30-year-old dietitian, gym trainer and Full-Stack Developer. 
+            Currently working on Appsus, an integrated platform to enhance
+            productivity and organization.</p>
         </div>
       </div>
     </section>
