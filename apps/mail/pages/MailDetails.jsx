@@ -9,6 +9,7 @@ export function MailDetails() {
 
     const params = useParams()
 
+    
     useEffect(() => {
         loadMail()
     }, [])

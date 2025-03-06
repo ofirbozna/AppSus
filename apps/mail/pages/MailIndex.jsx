@@ -32,7 +32,7 @@ export function MailIndex() {
             sentAt: null,
             removedAt: null,
             from: 'ofirNevo@appsus.com',
-            to:''
+            to: ''
         })
     }, [])
 
@@ -110,6 +110,7 @@ export function MailIndex() {
             })
     }
 
+
     function countUnreadMails() {
         mailsService.query()
             .then(mails => {
@@ -118,16 +119,25 @@ export function MailIndex() {
             })
     }
 
-    function onSetIsReadBtn(mailId) {
+    function onSetIsRead(mailId,isMailprevClicked) {
+       console.log('work?')
+        if(isMailprevClicked){
+            setMails(prevMails => {
+                return prevMails.map(mail =>
+                    mail.id === mailId ? { ...mail, isRead: mail.isRead===true } : mail
+                )
+            })
+        }else{
         setMails(prevMails => {
             return prevMails.map(mail =>
                 mail.id === mailId ? { ...mail, isRead: !mail.isRead } : mail
             )
-        })
+        })}
         mailsService.get(mailId)
             .then(mail => {
                 mail.isRead = !mail.isRead
                 mailsService.save(mail)
+                .then(loadMails)
 
             })
     }
@@ -144,7 +154,7 @@ export function MailIndex() {
                 onSetIsCompose,
                 isCompose,
                 onSetIsStared,
-                onSetIsReadBtn
+                onSetIsRead
             }} />
         </main>
 
