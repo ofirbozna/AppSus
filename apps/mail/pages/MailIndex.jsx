@@ -129,7 +129,7 @@ export function MailIndex() {
             })
             mailsService.get(mailId)
                 .then(mail => {
-                    mail.isRead = mail.isRead === true
+                    mail.isRead = true
                     mailsService.save(mail)
                         .then(loadMails)
 
