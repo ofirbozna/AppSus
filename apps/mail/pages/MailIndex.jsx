@@ -119,27 +119,36 @@ export function MailIndex() {
             })
     }
 
-    function onSetIsRead(mailId,isMailprevClicked) {
-       console.log('work?')
-        if(isMailprevClicked){
+    function onSetIsRead(mailId, isMailprevClicked) {
+        console.log('work?')
+        if (isMailprevClicked) {
             setMails(prevMails => {
                 return prevMails.map(mail =>
-                    mail.id === mailId ? { ...mail, isRead: mail.isRead===true } : mail
+                    mail.id === mailId ? { ...mail, isRead: mail.isRead === true } : mail
                 )
             })
-        }else{
-        setMails(prevMails => {
-            return prevMails.map(mail =>
-                mail.id === mailId ? { ...mail, isRead: !mail.isRead } : mail
-            )
-        })}
-        mailsService.get(mailId)
-            .then(mail => {
-                mail.isRead = !mail.isRead
-                mailsService.save(mail)
-                .then(loadMails)
+            mailsService.get(mailId)
+                .then(mail => {
+                    mail.isRead = mail.isRead === true
+                    mailsService.save(mail)
+                        .then(loadMails)
 
+                })
+        } else {
+            setMails(prevMails => {
+                return prevMails.map(mail =>
+                    mail.id === mailId ? { ...mail, isRead: !mail.isRead } : mail
+                )
             })
+            mailsService.get(mailId)
+                .then(mail => {
+                    mail.isRead = !mail.isRead
+                    mailsService.save(mail)
+                        .then(loadMails)
+
+                })
+        }
+
     }
 
     return <section className="mails-container">
